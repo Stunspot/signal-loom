@@ -15,9 +15,7 @@ REQUIRED = (
     "agents/openai.yaml",
     "manifest.json",
     "knowledge/infographic-toolkit-v2-canonical.md",
-    "knowledge/infographic-toolkit-users-guide-canonical.md",
     "knowledge/operating-doctrine.md",
-    "assets/canonical/infographic-toolkit-cover.png",
     "assets/loomfile.template/project.yaml",
     "schemas/project.schema.json",
     "scripts/init_loomfile.py",
@@ -26,7 +24,6 @@ REQUIRED = (
     "scripts/package_loomfile.py",
     "fallbacks/degraded-capability.md",
     "fallbacks/universal-copy-paste-workflow.md",
-    "evals/eval-manifest.yaml",
 )
 
 
