@@ -177,7 +177,7 @@ Checks a bounded set of static HTML properties: semantic regions, language, titl
 python scripts/package_loomfile.py LOOMFILE OUTPUT.zip
 ```
 
-Validates first, refuses symbolic links and several secret-like names, and builds a one-root archive at a temporary path. It exposes the requested ZIP and replaces the project release manifest only after archive construction succeeds; a write or manifest-commit failure removes temporary/final archive artifacts, preserves the prior manifest, and permits retry. It refuses to overwrite an existing archive. Its denylist is not a content scanner.
+Validates first, refuses symbolic links and several secret-like names, and builds a one-root archive at a temporary path. It hashes the exact bytes written to each archive entry and places the generated release manifest inside the ZIP; it does not alter the Loomfile's existing `review/release-manifest.json`. Only a completed ZIP is exposed at the requested path. Write or final-link failure removes temporary/final archive artifacts, preserves the project, and permits retry. An existing or concurrently created output is never overwritten. Its denylist is not a content scanner.
 
 ## Troubleshooting and recovery
 

@@ -21,14 +21,7 @@ except ImportError:  # Direct script execution.
 
 DENIED_NAMES = {".env", "id_rsa", "id_ed25519", "credentials", "credentials.json"}
 DENIED_SUFFIXES = {".key", ".pem", ".pfx", ".p12"}
-
-
-def digest(path: Path) -> str:
-    value = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            value.update(block)
-    return value.hexdigest()
+CHUNK_SIZE = 1024 * 1024
 
 
 def _temporary_path(directory: Path, prefix: str, suffix: str) -> Path:
@@ -42,6 +35,17 @@ def _remove_if_present(path: Path) -> None:
         path.unlink()
     except FileNotFoundError:
         pass
+
+
+def _write_file_entry(archive: zipfile.ZipFile, path: Path, arcname: str) -> dict[str, object]:
+    value = hashlib.sha256()
+    byte_count = 0
+    with path.open("rb") as source, archive.open(arcname, "w", force_zip64=True) as destination:
+        for block in iter(lambda: source.read(CHUNK_SIZE), b""):
+            destination.write(block)
+            value.update(block)
+            byte_count += len(block)
+    return {"path": arcname.split("/", 1)[1], "bytes": byte_count, "sha256": value.hexdigest()}
 
 
 def package(root: Path, output: Path) -> tuple[Path, int]:
@@ -66,30 +70,13 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
         if path != manifest_path:
             files.append(path)
 
-    manifest = {
-        "status": "packaged",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "warnings": warnings,
-        "files": [
-            {
-                "path": path.relative_to(root).as_posix(),
-                "bytes": path.stat().st_size,
-                "sha256": digest(path),
-            }
-            for path in files
-        ],
-    }
-    manifest_bytes = (json.dumps(manifest, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
-
     output.parent.mkdir(parents=True, exist_ok=True)
-    temporary_archive = None
-    temporary_manifest = None
+    temporary_archive: Path | None = None
     output_committed = False
 
     try:
         temporary_archive = _temporary_path(output.parent, f".{output.name}.", ".tmp")
-        temporary_manifest = _temporary_path(manifest_path.parent, ".release-manifest.", ".tmp")
-        temporary_manifest.write_bytes(manifest_bytes)
+        manifest_entries: list[dict[str, object]] = []
         with zipfile.ZipFile(
             temporary_archive,
             "w",
@@ -97,17 +84,27 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
             compresslevel=9,
         ) as archive:
             for path in files:
-                archive.write(path, f"{root.name}/{path.relative_to(root).as_posix()}")
+                relative = path.relative_to(root).as_posix()
+                manifest_entries.append(
+                    _write_file_entry(archive, path, f"{root.name}/{relative}")
+                )
+            manifest = {
+                "status": "packaged",
+                "generated_at": datetime.now(timezone.utc).isoformat(),
+                "warnings": warnings,
+                "files": manifest_entries,
+            }
+            manifest_bytes = (
+                json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
+            ).encode("utf-8")
             archive.writestr(f"{root.name}/review/release-manifest.json", manifest_bytes)
 
-        # A hard link atomically creates the final name without overwriting a file
-        # created after the initial guard. The temporary archive is on the same volume.
+        # The completed archive is the only committed artifact. A hard link creates
+        # the final name without overwriting a path created after the initial guard.
         os.link(temporary_archive, output)
         output_committed = True
         _remove_if_present(temporary_archive)
         temporary_archive = None
-        os.replace(temporary_manifest, manifest_path)
-        temporary_manifest = None
         return output, len(files) + 1
     except BaseException:
         if output_committed:
@@ -116,8 +113,6 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
     finally:
         if temporary_archive is not None:
             _remove_if_present(temporary_archive)
-        if temporary_manifest is not None:
-            _remove_if_present(temporary_manifest)
 
 
 def main(argv: list[str] | None = None) -> int:

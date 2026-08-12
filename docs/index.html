@@ -105,7 +105,7 @@ python (Join-Path $target 'scripts\self_check.py')</code></pre>
       <div class="commands"><pre><code>python scripts/validate_loomfile.py ./my-story
 python scripts/inspect_infographic_html.py ./my-story/output/web/index.html
 python scripts/package_loomfile.py ./my-story ./my-story.zip</code></pre></div>
-      <p>The packager builds at a temporary path and exposes the final archive only after ZIP construction succeeds. A write or manifest-commit failure cleans up archive artifacts and preserves the prior release manifest, so retry does not require manual repair. It refuses an existing output path and requires same-directory temporary-file and hard-link support at the destination. It rejects symbolic links and several secret-like filenames, but it does not inspect file contents for secrets or publish anything.</p>
+      <p>The packager hashes the exact bytes written into a temporary ZIP and stores the generated release manifest inside that archive; it does not alter the Loomfile. Only a completed ZIP is exposed at the requested path. Write or final-link failure cleans up archive artifacts, a competing output is never overwritten, and retry needs no project repair. The destination requires same-directory temporary-file and hard-link support. The filename denylist is not a content scanner, and nothing is published.</p>
     </section>
 
     <section class="section paper" id="workflow">
