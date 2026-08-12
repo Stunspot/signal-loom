@@ -116,7 +116,7 @@ python scripts/inspect_infographic_html.py ./my-story/output/web/index.html
 python scripts/package_loomfile.py ./my-story ./my-story.zip
 ```
 
-The package command validates state, rejects symbolic links and several secret-like filenames, writes `review/release-manifest.json`, and creates a one-root ZIP. It does not scan file contents for secrets and does not publish the archive.
+The package command validates state, rejects symbolic links and several secret-like filenames, and builds a one-root ZIP at a same-directory temporary path. Only after the ZIP closes successfully does it expose the final archive and replace `review/release-manifest.json`; write or commit failures remove temporary and final archive artifacts and preserve the prior manifest. It refuses an existing output path, requires the destination filesystem to support same-directory temporary files and hard links, does not scan file contents for secrets, and does not publish the archive.
 
 ## Inputs and outputs
 

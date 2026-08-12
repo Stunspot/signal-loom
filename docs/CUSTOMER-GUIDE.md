@@ -177,7 +177,7 @@ Checks a bounded set of static HTML properties: semantic regions, language, titl
 python scripts/package_loomfile.py LOOMFILE OUTPUT.zip
 ```
 
-Validates first, refuses symbolic links and several secret-like names, writes file hashes to the release manifest, and creates a one-root archive. It refuses to overwrite an existing archive. Its denylist is not a content scanner.
+Validates first, refuses symbolic links and several secret-like names, and builds a one-root archive at a temporary path. It exposes the requested ZIP and replaces the project release manifest only after archive construction succeeds; a write or manifest-commit failure removes temporary/final archive artifacts, preserves the prior manifest, and permits retry. It refuses to overwrite an existing archive. Its denylist is not a content scanner.
 
 ## Troubleshooting and recovery
 
@@ -230,6 +230,7 @@ See [SECURITY.md](../SECURITY.md) for reporting and safe handling.
 - Schemas are shipped as reference contracts; `validate_loomfile.py` does not execute full JSON Schema validation.
 - The initializer does not migrate or merge projects.
 - The packager's secret-like filename denylist is incomplete and does not inspect file contents.
+- Safe final-path creation requires the archive destination filesystem to support same-directory temporary files and hard links; choose another local destination if that operation is unavailable.
 - No publication, hosting, social posting, media buying, or account login is performed.
 - Current platform constraints and current-sensitive facts require fresh authorized evidence.
 - Accessibility requires separate rendered, keyboard, zoom/reflow, contrast, and assistive-technology testing.

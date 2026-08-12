@@ -105,7 +105,7 @@ python (Join-Path $target 'scripts\self_check.py')</code></pre>
       <div class="commands"><pre><code>python scripts/validate_loomfile.py ./my-story
 python scripts/inspect_infographic_html.py ./my-story/output/web/index.html
 python scripts/package_loomfile.py ./my-story ./my-story.zip</code></pre></div>
-      <p>The packager refuses to overwrite an archive. It rejects symbolic links and several secret-like filenames, but it does not inspect file contents for secrets and does not publish anything.</p>
+      <p>The packager builds at a temporary path and exposes the final archive only after ZIP construction succeeds. A write or manifest-commit failure cleans up archive artifacts and preserves the prior release manifest, so retry does not require manual repair. It refuses an existing output path and requires same-directory temporary-file and hard-link support at the destination. It rejects symbolic links and several secret-like filenames, but it does not inspect file contents for secrets or publish anything.</p>
     </section>
 
     <section class="section paper" id="workflow">
