@@ -285,6 +285,39 @@ class InitializeLoomfileTests(unittest.TestCase):
             package(destination, archive)
             assert_archive_manifest_matches(self, archive, destination.name)
 
+    def test_post_link_replacement_is_preserved_during_interrupted_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            destination = root / "project"
+            archive = root / "project.zip"
+            initialize(destination, "Competing replacement")
+            manifest_path = destination / "review" / "release-manifest.json"
+            manifest_before = manifest_path.read_bytes()
+            competing_bytes = b"replacement created by another process"
+            real_remove = package_module._remove_if_present
+            interrupted = False
+
+            def replace_output_then_interrupt(path: Path) -> None:
+                nonlocal interrupted
+                if path.name.endswith(".tmp") and archive.exists() and not interrupted:
+                    archive.unlink()
+                    archive.write_bytes(competing_bytes)
+                    interrupted = True
+                    raise KeyboardInterrupt("simulated interruption after replacement")
+                real_remove(path)
+
+            with patch.object(
+                package_module, "_remove_if_present", side_effect=replace_output_then_interrupt
+            ):
+                with self.assertRaisesRegex(KeyboardInterrupt, "simulated interruption"):
+                    package(destination, archive)
+
+            self.assertTrue(interrupted)
+            self.assertEqual(archive.read_bytes(), competing_bytes)
+            self.assertEqual(manifest_path.read_bytes(), manifest_before)
+            self.assertEqual(list(root.glob(f".{archive.name}.*.tmp")), [])
+            self.assertEqual(list(root.glob(f".{archive.name}.verify.*")), [])
+
 
 if __name__ == "__main__":
     unittest.main()

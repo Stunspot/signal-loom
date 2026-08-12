@@ -45,11 +45,16 @@ def _within(root: Path, candidate: Path) -> bool:
         return False
 
 
-def _same_file(left: Path | None, right: Path) -> bool:
-    if left is None:
+def _file_identity(path: Path) -> tuple[int, int]:
+    stat = path.stat(follow_symlinks=False)
+    return stat.st_dev, stat.st_ino
+
+
+def _matches_identity(path: Path, identity: tuple[int, int] | None) -> bool:
+    if identity is None:
         return False
     try:
-        return left.samefile(right)
+        return _file_identity(path) == identity
     except (FileNotFoundError, OSError):
         return False
 
@@ -95,7 +100,7 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
 
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary_archive: Path | None = None
-    output_committed = False
+    archive_identity: tuple[int, int] | None = None
 
     try:
         temporary_archive = _temporary_path(output.parent, f".{output.name}.", ".tmp")
@@ -140,13 +145,13 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
 
         # The completed, revalidated archive is the only committed artifact. A hard
         # link creates the final name without overwriting a concurrent output.
+        archive_identity = _file_identity(temporary_archive)
         os.link(temporary_archive, output)
-        output_committed = True
         _remove_if_present(temporary_archive)
         temporary_archive = None
         return output, len(files) + 1
     except BaseException:
-        if output_committed or _same_file(temporary_archive, output):
+        if _matches_identity(output, archive_identity):
             _remove_if_present(output)
         raise
     finally:
