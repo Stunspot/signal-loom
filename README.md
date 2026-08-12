@@ -132,7 +132,7 @@ The canonical output is a Loomfile. Its important surfaces are:
 | `state/visual-plan.json` | Earned forms, rejected forms, semantic outline, and alternatives |
 | `output/web/` | Semantic web artifact and local assets |
 | `output/carousel/`, `output/platforms/` | Optional requested reconstructions |
-| `review/` | Diagnostics, accessibility evidence, and release manifest |
+| `review/` | Project diagnostics, accessibility evidence, and the project-side manifest record; packaging embeds a fresh manifest in the ZIP without changing this directory |
 | `checkpoints/snapshots/` | Material state saved before consequential changes |
 
 The complete field contract is in [the customer guide](docs/CUSTOMER-GUIDE.md#configuration-and-state).
