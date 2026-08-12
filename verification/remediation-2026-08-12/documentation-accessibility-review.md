@@ -1,12 +1,12 @@
 # Documentation accessibility review
 
 Date: 2026-08-12
-Documentation fingerprint: 963120c6d672d3444c4225fb868c8ed3e09a4c170e0e93d5bfdddc621ab1bd45
-Presentation fingerprint: b89e7829a934410c93b930d6b72ba5b477a8ffa9af366ead47990b65b9a34fb1
-Result: PASS for inspected source-level accessibility; rendered keyboard, zoom/reflow, screen-reader, and assistive-technology behavior remains NOT TESTED.
+Documentation fingerprint: e81e5ee4c62ec44be7767e5ff7c1a2319f0699e8d6b609dcc0f37ca9077db59a
+Presentation fingerprint: 7ad424dc3649cd144fc610800a013cff0cc5a8a225e128d3068a47de455af4a3
+Result: PASS for source-level accessibility and responsive geometry; post-deployment visual browser, keyboard, zoom/reflow, screen-reader, and assistive-technology behavior remains NOT TESTED.
 
-The site has a skip link, semantic header/nav/main/section/footer structure, one H1, ordered headings, descriptive link text, visible focus, responsive layouts, a mobile single-column stage flow, reduced-motion handling, no required JavaScript, and no remote font/runtime dependency. Local navigation and same-page fragments exercised: 37, failures: 0. Bounded HTML inspection passed index and 404 with zero warnings.
+The screenshot exposed a material zoom/ultrawide reflow failure: readable content collapsed to an extremely narrow column because horizontal padding was derived from the full viewport inside an already capped box. The repaired container remains 288 pixels wide at a 320-pixel viewport, grows normally through tablet and desktop widths, and caps at 1,312 pixels from 1,430 through 5,720-pixel effective viewports. The previous collapsing selector is absent and a focused regression rejects its return.
 
-Computed contrast ratios: body 15.29:1; muted text 6.35:1; links 6.85:1; eyebrow 5.02:1; paper links 7.58:1; primary button 8.97:1; footer links 12.24:1; focus indicator 7.68:1.
+The site retains its skip link, semantic landmarks, one H1, ordered headings, descriptive alternatives, visible focus, responsive grid breakpoints, reduced-motion handling, and no required JavaScript. Both bounded HTML inspections pass with zero warnings. Local links and fragments pass. The rewritten README has one literal product lead, short task-led sections, meaningful links, and complete installation, verification, recovery, privacy, and lifecycle routes.
 
-The README and Pages heroes have descriptive alternatives. The social metadata alternative names the product, its infographic function, and the depicted source-to-output relationship. The illustrations contain no required instructional text; the social card's identifying text is also supplied in HTML metadata.
+This is not a conformance claim. The corrected deployed page must still be observed in a real browser, including the zoom state that exposed the defect.

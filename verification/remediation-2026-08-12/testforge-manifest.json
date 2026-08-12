@@ -2,24 +2,24 @@
     "manifest_version":  "1.0",
     "target":  {
                    "name":  "Signal Loom final documentation and presentation candidate",
-                   "revision":  "82423dc89c7ad9ad754c963fe57ad43191722218512d1040cfd16513f7293b66",
+                   "revision":  "1187defe54242e7e705868ebea1ba71ece6e8dde877c98eecd801867c5b5540a",
                    "target_class":  "release_candidate"
                },
     "scope":  {
                   "included":  [
-                                   "Final repository product, documentation, Pages source, visual assets, and local verification at candidate fingerprint 82423dc89c7ad9ad754c963fe57ad43191722218512d1040cfd16513f7293b66",
+                                   "Final repository product, documentation, Pages source, visual assets, and local verification at candidate fingerprint 1187defe54242e7e705868ebea1ba71ece6e8dde877c98eecd801867c5b5540a",
                                    "Customer journey, infographic-first positioning, packaging custody, static accessibility, three visual roles, and publication readiness"
                                ],
                   "excluded":  [
                                    "Fresh-host Codex and Claude Code discovery, invocation, and health",
-                                   "Rendered browser, social-preview cache, screen-reader, and formal accessibility conformance",
+                                   "Post-repair rendered browser, screen-reader, and formal accessibility conformance",
                                    "Active security testing",
-                                   "Protected main update, Pages deployment, and post-deployment live verification"
+                                   "Post-repair Pages deployment and visual confirmation"
                                ],
                   "constraints":  [
-                                      "Do not launch a browser; only a pre-existing browser may be used and none is available after restart",
-                                      "Do not invoke GitHub-hosted Actions; user reports testing minutes exhausted",
-                                      "Local non-production checks only until publication"
+                                      "Chrome control is unavailable because the Codex Windows helper fails before connection",
+                                      "Use only local verification and the authorized Pages-only deployment workflow",
+                                      "Preserve unrelated local work"
                                   ],
                   "safety_boundary":  [
                                           "Local non-production verification and publication of an exact reviewed candidate branch"
@@ -29,13 +29,13 @@
                           "observed":  [
                                            {
                                                "id":  "C-001",
-                                               "statement":  "The final product and documentation bytes match candidate fingerprint 82423dc89c7ad9ad754c963fe57ad43191722218512d1040cfd16513f7293b66.",
+                                               "statement":  "The final product and documentation bytes match candidate fingerprint 1187defe54242e7e705868ebea1ba71ece6e8dde877c98eecd801867c5b5540a.",
                                                "basis":  "FINGERPRINT.sha256",
                                                "confidence":  "high"
                                            },
                                            {
                                                "id":  "C-002",
-                                               "statement":  "Eleven package tests, package self-check, both HTML inspections, 37 local navigation targets, and the pinned line-ending verifier pass.",
+                                               "statement":  "Thirteen package and presentation tests, package self-check, both HTML inspections, local navigation checks, and the pinned line-ending verifier pass.",
                                                "basis":  "verification-summary.md and raw evidence",
                                                "confidence":  "high"
                                            },
@@ -55,10 +55,10 @@
                           "unresolved":  [
                                              {
                                                  "id":  "C-004",
-                                                 "statement":  "Deployed candidate rendering and live repository social preview are not yet observed.",
-                                                 "basis":  "candidate is not yet on main and browser launch is prohibited",
+                                                 "statement":  "The corrected post-repair browser rendering is not yet observed.",
+                                                 "basis":  "Chrome bridge fails in the known Windows helper before connecting to the user-opened browser",
                                                  "confidence":  "high",
-                                                 "consequence":  "repository cannot receive final live PASS until post-publication browser verification"
+                                                 "consequence":  "final rendered Pages verdict remains pending after deployment"
                                              }
                                          ]
                       },
@@ -128,6 +128,17 @@
                       "disposition":  "covered",
                       "verification":  [
                                            "S-A11Y"
+                                       ]
+                  },
+                  {
+                      "id":  "R-005",
+                      "statement":  "A capped content box with viewport-derived internal padding can collapse the customer journey at high zoom or ultrawide effective viewports.",
+                      "severity":  "critical",
+                      "likelihood":  "medium",
+                      "confidence":  "high",
+                      "disposition":  "covered",
+                      "verification":  [
+                                           "S-WIDE-VIEWPORT"
                                        ]
                   }
               ],
@@ -240,6 +251,36 @@
                                            "documentation-accessibility-review.md"
                                        ],
                           "status":  "executed"
+                      },
+                      {
+                          "id":  "S-WIDE-VIEWPORT",
+                          "risk_ids":  [
+                                           "R-005"
+                                       ],
+                          "title":  "Screenshot-equivalent wide viewport retains readable content measure",
+                          "layer":  "static",
+                          "preconditions":  [
+                                                "final docs/style.css",
+                                                "supplied 1430x1735 screenshot showing near-zero content width"
+                                            ],
+                          "action":  [
+                                         "reject the failed capped-box plus viewport-padding rule",
+                                         "compute repaired content width from 320 through 5720 effective pixels",
+                                         "run focused presentation regressions"
+                                     ],
+                          "expected":  [
+                                           "content remains at least 288 pixels wide on a 320-pixel viewport",
+                                           "content caps at 1312 pixels without collapsing at wide effective viewports"
+                                       ],
+                          "forbidden":  [
+                                            "claim rendered-browser PASS from source geometry alone"
+                                        ],
+                          "evidence":  [
+                                           "tests/test_public_presentation.py",
+                                           "verification-summary.md",
+                                           "documentation-accessibility-review.md"
+                                       ],
+                          "status":  "executed"
                       }
                   ],
     "tests":  [
@@ -278,6 +319,15 @@
                       "path":  "verification/remediation-2026-08-12/documentation-accessibility-review.md",
                       "status":  "passed",
                       "execution_id":  "E-004"
+                  },
+                  {
+                      "id":  "T-WIDE-VIEWPORT",
+                      "scenario_ids":  [
+                                           "S-WIDE-VIEWPORT"
+                                       ],
+                      "path":  "tests/test_public_presentation.py",
+                      "status":  "passed",
+                      "execution_id":  "E-007"
                   }
               ],
     "executions":  [
@@ -355,6 +405,24 @@
                            "status":  "passed",
                            "exit_code":  0,
                            "raw_evidence":  "verification/remediation-2026-08-12/raw/line-ending-policy-local.json"
+                       },
+                       {
+                           "id":  "E-007",
+                           "command":  [
+                                           "python",
+                                           "-X",
+                                           "utf8",
+                                           "-m",
+                                           "unittest",
+                                           "discover",
+                                           "-s",
+                                           "tests",
+                                           "-v"
+                                       ],
+                           "working_directory":  "E:/Github/.portfolio-remediation-019ff22b/signal-loom",
+                           "status":  "passed",
+                           "exit_code":  0,
+                           "raw_evidence":  "verification/remediation-2026-08-12/verification-summary.md"
                        }
                    ],
     "findings":  [
@@ -370,6 +438,20 @@
                          "confidence":  "high",
                          "next_action":  "None: direct inspection shows these assertions compare complete filesystem state before and after destructive-edge simulations; they are discriminating custody checks, not broad golden snapshots.",
                          "status":  "resolved"
+                     },
+                     {
+                         "id":  "F-002",
+                         "classification":  "PRODUCT_DEFECT",
+                         "severity":  "critical",
+                         "statement":  "Signal Loom Pages collapsed into a word-wide column at the screenshot browser state because viewport-growing horizontal padding was applied inside an already capped content box.",
+                         "evidence":  [
+                                          "docs/style.css",
+                                          "tests/test_public_presentation.py",
+                                          "documentation-accessibility-review.md"
+                                      ],
+                         "confidence":  "high",
+                         "next_action":  "Deploy the reviewed repair and visually recheck the same browser state.",
+                         "status":  "resolved_local_pending_live_confirmation"
                      }
                  ],
     "residual_risks":  [
@@ -382,35 +464,35 @@
                            },
                            {
                                "id":  "RR-002",
-                               "statement":  "Rendered browser and assistive-technology behavior are not tested in this constrained run.",
-                               "treatment":  "Static accessibility is bounded; rendered verdict remains pending an existing authorized browser.",
+                               "statement":  "Corrected rendered browser and assistive-technology behavior remain untested because the Chrome bridge fails before connection.",
+                               "treatment":  "Deploy the exact repair and visually inspect the same zoom/viewport state manually.",
                                "owner":  "maintainer",
                                "revisit_condition":  "candidate is live and an existing browser is available"
                            },
                            {
                                "id":  "RR-003",
-                               "statement":  "Protected main update, Pages deployment, and exact live verification have not run.",
-                               "treatment":  "Push the exact reviewed candidate branch without opening a PR or triggering Actions; main remains blocked pending explicit ruleset handling.",
+                               "statement":  "The repaired README and CSS have not yet been deployed.",
+                               "treatment":  "Publish the exact reviewed candidate using the authorized ruleset bypass and Pages-only workflow.",
                                "owner":  "maintainer",
-                               "revisit_condition":  "candidate branch is published"
+                               "revisit_condition":  "repair commit is live"
                            }
                        ],
     "review":  {
                    "status":  "REVIEW_PASS_WITH_CONDITIONS",
                    "findings":  [
-                                    "Local candidate passes. Publish the exact branch without GitHub Actions; main, Pages deployment, rendered browser journey, live assets, and social-preview cache remain post-publication gates."
+                                    "The screenshot-proven wide-viewport collapse is repaired in source and covered by a discriminating regression. Publish the exact candidate, then recheck the rendered page in the same browser state."
                                 ],
                    "reviewer":  "TestForge adversarial review applied after Hesperos and accessibility reviews"
                },
     "decision":  {
                      "status":  "READY_WITH_RESIDUAL_RISK",
                      "basis":  [
-                                   "All local decision-critical product, package, documentation, static accessibility, visual, link, and line-ending checks pass for exact candidate fingerprint.",
-                                   "Signal Loom now leads with infographic production and uses three inspected role-specific generated artworks; the programmed renderer is removed.",
-                                   "GitHub-hosted Actions and browser launch are prohibited, so main/deployment/live proof remain external gates."
+                                   "All local product, README, Pages-source, static accessibility, link, line-ending, and regression checks pass for the exact candidate fingerprint.",
+                                   "The README now leads with infographic production and supports a short path to installation and first output.",
+                                   "The screenshot-proven viewport-collapse mechanism is removed and directly regression-tested."
                                ],
                      "authority_required":  [
-                                                "No further authority is required to publish the reviewed candidate branch. Updating protected main without a required hosted status requires explicit user authorization or user action."
+                                                "Publish the exact reviewed candidate and visually inspect the corrected live page."
                                             ]
                  }
 }

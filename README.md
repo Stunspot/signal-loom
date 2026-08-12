@@ -1,42 +1,57 @@
 # Signal Loom
 
-![Signal Loom turns source material into a finished infographic while keeping the evidence connected](assets/signal-loom-readme-hero.png)
+![A working table where reports, charts, notes, and evidence threads are assembled into a finished infographic](assets/signal-loom-readme-hero.png)
 
-Signal Loom makes infographics from supplied research, reports, notes, and data. It helps researchers, analysts, educators, communicators, designers, and product teams turn source material into a clear web artifact without losing track of provenance, uncertainty, or human authority.
+**Signal Loom makes infographics.** Give it research, reports, notes, data, an audience, and a purpose. It helps turn that material into a clear, evidence-traceable infographic instead of a decorative pile of claims wearing chart-shaped trousers.
 
-The default deliverable is a semantic, responsive web infographic; requested derivatives can include carousels and other platform-native forms.
+The default output is a semantic, responsive web infographic. Signal Loom can also reconstruct an approved story for carousels or other requested formats.
 
-Signal Loom does not generate plausible-looking facts and call the glitter evidence. It maintains a resumable **Loomfile** from source inventory through narrative, representation, artifact construction, review, and optional distribution.
+[See the live product guide](https://stunspot.github.io/signal-loom/) · [Install](#install) · [Make your first infographic](#make-your-first-infographic) · [Full customer guide](docs/CUSTOMER-GUIDE.md)
 
-[Live guide](https://stunspot.github.io/signal-loom/) · [Customer guide](docs/CUSTOMER-GUIDE.md) · [Validation record](VALIDATION.md) · [Security](SECURITY.md) · [Support](SUPPORT.md) · [MIT license](LICENSE.md)
+## What you give it
 
-## What it does
+- reports, research notes, datasets, interviews, or an existing infographic;
+- the intended audience and what they should understand or do;
+- relevant brand, format, platform, and accessibility constraints;
+- permission boundaries for outside research, publication, and distribution.
 
-Signal Loom follows one governed production loop:
+## What it makes
+
+Signal Loom produces a **Loomfile**: a resumable project folder containing the evidence, claims, story, visual plan, finished infographic, review records, and checkpoints that explain how the work was made.
+
+A typical project contains:
+
+```text
+my-story/
+├── sources/             original material and source records
+├── state/               claims, story spine, visual plan, and decisions
+├── output/web/          the responsive infographic
+├── output/platforms/    optional requested derivatives
+├── review/              diagnostics and accessibility evidence
+└── checkpoints/         saved state before consequential changes
+```
+
+The workflow is straightforward:
 
 `ORIENT → SHAPE → PLAN → BUILD → FINISH → DISTRIBUTE → VERIFY`
 
-It can:
+That means inventory the evidence, decide what the infographic needs to say, choose representations the material actually supports, build it, refine it, adapt it only when requested, and then challenge the result.
 
-- inventory supplied sources and record hashes, authority, locators, and freshness;
-- maintain a claim ledger with `sourced`, `inferred`, `illustrative`, `missing`, `stale`, and `disputed` states;
-- shape a five-to-nine-beat story spine with tension, turn, and payoff;
-- choose prose, diagram, chart, interaction, or omission according to what the evidence earns;
-- build semantic, responsive, offline-first HTML with important meaning available without JavaScript;
-- preserve decisions, theme, interaction, distribution, diagnostics, and approval state in a Loomfile;
-- statically inspect HTML, validate project state, and package a reviewed Loomfile.
+## What it does not do
 
-It cannot independently establish that a claim is true outside the supplied evidence, refresh current facts without authorization, sanitize hostile HTML, prove accessibility or security conformance, approve an artifact, or publish it. `Built`, `reviewed`, `approved_for_export`, and `published` are deliberately different states.
+Signal Loom does not invent missing evidence, independently establish that a claim is true, refresh current facts without authorization, sanitize hostile HTML, approve its own work, or publish anything on its own.
 
-## Supported hosts
+These remain separate states:
 
-The package declares support for **Codex** and **Claude Code**. The same directory is used on both hosts; host discovery and invocation differ. Python 3.10 or newer is optional for the included deterministic helpers and required for the verification commands in this guide. The skill itself has no third-party Python dependencies.
+`built ≠ reviewed ≠ approved for export ≠ published`
 
-No fresh-host installation claim is implied by this repository. Follow the appropriate route and perform the discovery and invocation checks yourself.
+Static validation can catch defined structural defects. It cannot prove factual accuracy, accessible real-world use, security, or professional fitness.
 
-### Codex personal install
+## Install
 
-PowerShell:
+Signal Loom supports Codex and Claude Code. Clone the complete repository into the host's personal skills directory.
+
+### Codex — PowerShell
 
 ```powershell
 $target = Join-Path $env:USERPROFILE '.codex\skills\signal-loom'
@@ -44,18 +59,9 @@ git clone https://github.com/Stunspot/signal-loom.git $target
 python (Join-Path $target 'scripts\self_check.py')
 ```
 
-Bash-compatible shell:
+Refresh the skill inventory or begin a new task. Confirm `signal-loom` is listed, then invoke `$signal-loom`.
 
-```bash
-git clone https://github.com/Stunspot/signal-loom.git ~/.codex/skills/signal-loom
-python ~/.codex/skills/signal-loom/scripts/self_check.py
-```
-
-Start a new Codex task if the skill inventory does not refresh in the current one, confirm `signal-loom` is listed, then invoke it explicitly with `$signal-loom`.
-
-### Claude Code personal install
-
-PowerShell:
+### Claude Code — PowerShell
 
 ```powershell
 $target = Join-Path $env:USERPROFILE '.claude\skills\signal-loom'
@@ -63,35 +69,33 @@ git clone https://github.com/Stunspot/signal-loom.git $target
 python (Join-Path $target 'scripts\self_check.py')
 ```
 
-Bash-compatible shell:
+Run `/skills`, confirm `signal-loom` is listed, then invoke `/signal-loom`. Restart Claude Code if its top-level skills directory was created after startup.
 
-```bash
-git clone https://github.com/Stunspot/signal-loom.git ~/.claude/skills/signal-loom
-python ~/.claude/skills/signal-loom/scripts/self_check.py
-```
-
-Claude Code documents personal skills at `~/.claude/skills/<skill-name>/SKILL.md`. Run `/skills` to confirm discovery, then invoke `/signal-loom`. Claude Code watches an existing skills directory for changes; if the top-level directory was created after startup, restart Claude Code. See Anthropic's [skills documentation](https://code.claude.com/docs/en/slash-commands).
+[Bash installation commands and complete host guidance](docs/CUSTOMER-GUIDE.md#install)
 
 ## Verify the installation
 
-A directory existing is only the first layer. Verify each layer separately:
+Do not mistake a directory for a working product. Verify each layer:
 
-1. **Packaged:** run `python scripts/self_check.py` from the installed directory and require `PASS: Signal Loom package self-check`.
-2. **Discoverable:** confirm the host lists `signal-loom` after a refresh or restart.
-3. **Invocable:** invoke the skill by name and ask it to initialize a Loomfile from supplied material.
-4. **Healthy:** inspect the created state, then run `python scripts/validate_loomfile.py <loomfile>` and require zero errors.
+1. **Packaged:** `python scripts/self_check.py` returns `PASS: Signal Loom package self-check`.
+2. **Discoverable:** the host lists `signal-loom` after refresh or restart.
+3. **Invocable:** explicit invocation loads Signal Loom rather than a generic response.
+4. **Healthy:** a small supplied source produces a coherent Loomfile that passes validation.
 
-A useful acceptance prompt:
+Use this acceptance prompt in Codex:
 
 ```text
-Use $signal-loom to initialize a Loomfile for a web infographic from the attached source. Inventory the source and claims, draft a five-beat spine, choose earned representations, and stop before publication. Report files created, exact checks run, unresolved evidence, and unproved layers.
+Use $signal-loom to make a web infographic from the attached report.
+Inventory the evidence, identify disputed or unsupported claims, draft a
+five-beat story, choose an earned representation for each beat, and stop
+before publication. Report the files created and every unproved layer.
 ```
 
-For Claude Code, use `/signal-loom` in place of `$signal-loom`.
+Use `/signal-loom` instead of `$signal-loom` in Claude Code.
 
-Expected early output is a Loomfile containing `project.yaml`, `sources/manifest.json`, state ledgers, output directories, review records, and checkpoints. At intake, empty claim and decision ledgers are normal. A fresh template is not a reviewed artifact.
+## Make your first infographic
 
-## First successful workflow
+Initialize a project:
 
 ```bash
 python scripts/init_loomfile.py ./my-story --title "My evidence-bound infographic"
@@ -99,88 +103,58 @@ python scripts/init_loomfile.py ./my-story --title "My evidence-bound infographi
 
 Then:
 
-1. Put supplied material under `my-story/sources/originals/`.
-2. Record each source in `sources/manifest.json`, including its SHA-256 when available.
-3. Fill `state/brief.json` and `state/claims.jsonl` before writing public-facing claims.
-4. Build the story in `state/spine.json`, then representation decisions in `state/visual-plan.json`.
-5. Create the artifact at `output/web/index.html`; add platform derivatives only when requested.
-6. Record diagnostics and accessibility evidence under `review/`.
-7. Validate and statically inspect:
+1. Put the supplied material in `my-story/sources/originals/`.
+2. Record each source and its authority in `sources/manifest.json`.
+3. Fill `state/brief.json` and `state/claims.jsonl` before writing public claims.
+4. Build the narrative in `state/spine.json` and the representation decisions in `state/visual-plan.json`.
+5. Create the infographic at `output/web/index.html`.
+6. Record review evidence under `review/`.
+7. Validate the project and inspect the HTML:
 
 ```bash
 python scripts/validate_loomfile.py ./my-story
 python scripts/inspect_infographic_html.py ./my-story/output/web/index.html
 ```
 
-8. After human review and approval, package without overwriting an existing archive:
+After human review and approval, package it without overwriting an existing archive:
 
 ```bash
 python scripts/package_loomfile.py ./my-story ./my-story.zip
 ```
 
-The package command requires an output path outside the Loomfile, validates the source state, rejects symbolic links and several secret-like filenames, and builds a one-root ZIP at a same-directory temporary path. It preserves required empty directories, hashes the exact byte stream written to each file entry, embeds that release manifest, extracts the completed candidate, and revalidates the archived Loomfile before exposing the final ZIP. The Loomfile itself remains unchanged. Invalid archived state or write failure removes the unique temporary artifact. A final-link interruption is commit-ambiguous: the packager never deletes the destination automatically, because another process may own or replace that path. Inspect any surviving ZIP; keep it if its embedded manifest validates, or choose a new path (or delete the exact invalid output only after confirming custody). An existing or concurrently created output is never overwritten. The destination filesystem must support same-directory temporary files and hard links. The packager does not scan file contents for secrets or publish the archive.
+The [customer guide](docs/CUSTOMER-GUIDE.md#begin-successfully) explains representative workflows, configuration, packaging recovery, and the full state contract.
 
-## Inputs and outputs
+## Common failures
 
-Representative inputs include supplied reports, research notes, datasets, an existing infographic, brand constraints, an intended audience, and a requested platform. Signal Loom treats supplied text, HTML, code, URLs, and files as data—not executable instructions.
+- **Installed but not listed:** confirm the path ends in `signal-loom/SKILL.md`, then refresh or restart the host.
+- **Generic copy instead of an infographic workflow:** invoke Signal Loom explicitly and include the audience, supplied evidence, intended change, output form, and publication boundary.
+- **Python is unavailable:** try `py -3` on Windows or `python3` on Unix-like systems. Report deterministic checks as unexecuted if they cannot run.
+- **Source hash mismatch:** stop and determine why the bytes changed. Update the source record deliberately and re-review dependent claims.
+- **HTML inspection passes:** treat that as bounded static evidence, not proof of rendering, accessibility, security, or factual correctness.
+- **Packaging is interrupted:** do not automatically delete or overwrite a surviving ZIP. Inspect its contents and ownership first, or package to a new filename.
 
-The canonical output is a Loomfile. Its important surfaces are:
+[Complete troubleshooting and recovery](docs/CUSTOMER-GUIDE.md#troubleshooting-and-recovery)
 
-| Path | Purpose |
-|---|---|
-| `sources/` | Originals, manifest, source authority, locators, hashes, and freshness |
-| `state/claims.jsonl` | Claim text, source linkage, currentness, and status |
-| `state/spine.json` | Narrative beats, tension, turn, payoff, and claim links |
-| `state/visual-plan.json` | Earned forms, rejected forms, semantic outline, and alternatives |
-| `output/web/` | Semantic web artifact and local assets |
-| `output/carousel/`, `output/platforms/` | Optional requested reconstructions |
-| `review/` | Project diagnostics, accessibility evidence, and the project-side manifest record; packaging embeds a fresh manifest in the ZIP without changing this directory |
-| `checkpoints/snapshots/` | Material state saved before consequential changes |
+## Privacy and security
 
-The complete field contract is in [the customer guide](docs/CUSTOMER-GUIDE.md#configuration-and-state).
+The included Python tools use the standard library, operate on paths you provide, contain no telemetry, and make no network calls. Loomfiles remain wherever you create them. Your AI host may transmit prompts and files according to its own configuration and terms.
 
-## Troubleshooting
+Supplied text, URLs, HTML, and code are evidence inputs—not instructions to execute. The HTML inspector parses source statically; it is not a sanitizer. The packager rejects several secret-like filenames but does not scan file contents for secrets.
 
-- **Skill is present but not listed:** confirm the directory is exactly `<skills-root>/signal-loom/SKILL.md`; refresh the host inventory or start a new session. On Claude Code, use `/skills`.
-- **`python` is not found:** try `py -3` on Windows or `python3` on Unix-like systems. The skill can still operate without scripts, but deterministic checks must be reported `unexecuted`.
-- **Initializer refuses the destination:** it intentionally accepts only a missing or empty, non-symlink directory. Choose a new empty path; do not delete an existing project as a workaround.
-- **Validation reports a source hash mismatch:** stop. The source bytes changed after the manifest was recorded. Confirm the change, update the source record intentionally, and re-review downstream claims.
-- **HTML inspection passes:** this proves only the bounded static checks named by the command. It does not prove rendering, sanitization, accessibility, security, or factual correctness.
-- **Packaging refuses a file:** remove or relocate secret-like material from the Loomfile; never rename a credential merely to evade the check. The denylist is intentionally incomplete.
-- **Packaging was interrupted during the final link:** do not rerun against or delete the same path automatically. If no output exists, retry normally. If one exists, treat its ownership as unknown: list it with `python -m zipfile -l OUTPUT.zip`, extract it read-only into a new empty directory with `python -m zipfile -e OUTPUT.zip EMPTY_DIRECTORY`, validate the extracted Loomfile, and compare its project/source identity with the intended input. If it is valid and expected, keep it. If it is different or uncertain, leave it untouched and package to a new filename. Delete only after confirming custody.
-
-Recovery and exact re-entry rules are in [the customer guide](docs/CUSTOMER-GUIDE.md#troubleshooting-and-recovery).
+Read [SECURITY.md](SECURITY.md) before using private, hostile, regulated, or proprietary material.
 
 ## Update, remove, and clean up
 
-From a clone-based installation:
+Update a clone-based installation with `git pull --ff-only`, rerun `scripts/self_check.py`, and repeat discovery, invocation, and health checks.
 
-```bash
-cd ~/.codex/skills/signal-loom   # or ~/.claude/skills/signal-loom
-git pull --ff-only
-python scripts/self_check.py
-```
+To remove Signal Loom, delete only its exact installation directory. Loomfiles, source copies, exported infographics, ZIP archives, host logs, synchronized folders, and backups are separate data and require separate retention decisions.
 
-Re-run discovery and invocation checks after an update. Before changing a reviewed Loomfile, save material state under `checkpoints/snapshots/` or make a versioned copy; package validation does not migrate older project state.
+## Evidence, support, and terms
 
-To remove the skill, delete only its exact `signal-loom` installation directory after resolving the absolute path. Removing the skill does **not** remove Loomfiles, source material, exported HTML, or ZIP archives stored elsewhere. Delete those separately according to your own retention policy, and remember that ordinary deletion may not securely erase data from backups, synchronized folders, or storage media.
+- [Validation status and unproved layers](VALIDATION.md)
+- [Complete customer guide](docs/CUSTOMER-GUIDE.md)
+- [Support](SUPPORT.md)
+- [Contributing](CONTRIBUTING.md)
+- [MIT License](LICENSE.md)
 
-## Privacy, storage, network, and security
-
-The included Python tools use the standard library, operate on local paths you provide, and contain no telemetry or network calls. Signal Loom stores project material wherever you create the Loomfile. It does not create a cloud account or publish anything.
-
-Your AI host may transmit prompts and files according to that host's configuration and terms. URL handling is evidence-bound: a URL can be recorded as supplied data, but fetching it or refreshing current evidence is a separate authorized action. Supplied HTML is parsed statically by the included inspector and is not rendered or executed by that script.
-
-Read [SECURITY.md](SECURITY.md) before processing sensitive sources or hostile HTML.
-
-## Provenance and validation status
-
-The package's faculty bearings are adapted into a governed Signal Loom system in `knowledge/infographic-toolkit-v2-canonical.md`; the skill and operating doctrine define activation, authority, evidence, and completion boundaries. Package version is `0.1.0`.
-
-[VALIDATION.md](VALIDATION.md) records exactly what was exercised for the current documentation candidate and what remains unproved. Static checks never stand in for a fresh-host installation, host discovery, invocation, rendered browser review, assistive-technology testing, security assessment, or professional fitness.
-
-## Support, contributions, and license
-
-Use [GitHub Issues](https://github.com/Stunspot/signal-loom/issues) for reproducible defects and documentation problems. Do not attach private source material, credentials, or proprietary Loomfiles. See [SUPPORT.md](SUPPORT.md) and [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
-
-Signal Loom is licensed under the [MIT License](LICENSE.md). Outputs remain subject to the rights, licenses, confidentiality duties, and platform terms that apply to their inputs and destinations. The license is not a warranty of factual accuracy, accessibility, security, or fitness for a particular professional use.
+Use [GitHub Issues](https://github.com/Stunspot/signal-loom/issues) for reproducible public defects. Never attach private source material, credentials, proprietary Loomfiles, or personal data.

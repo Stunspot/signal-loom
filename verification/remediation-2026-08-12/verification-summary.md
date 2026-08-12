@@ -1,21 +1,19 @@
 # Local verification summary
 
 Date: 2026-08-12
-Candidate fingerprint: 82423dc89c7ad9ad754c963fe57ad43191722218512d1040cfd16513f7293b66
+Candidate fingerprint: 1187defe54242e7e705868ebea1ba71ece6e8dde877c98eecd801867c5b5540a
+Documentation fingerprint: e81e5ee4c62ec44be7767e5ff7c1a2319f0699e8d6b609dcc0f37ca9077db59a
+Presentation fingerprint: 7ad424dc3649cd144fc610800a013cff0cc5a8a225e128d3068a47de455af4a3
 
-- Python unit tests: PASS, 11 of 11.
+- Root README: rewritten and completely reread; product-first customer journey PASS.
+- Wide-viewport root cause: identified and repaired.
+- Responsive geometry checks: PASS at 320, 672, 928, 1184, 1430, 1920, 3840, and 5720 effective pixels.
+- Focused presentation regressions: PASS, 2 of 2.
+- Complete unit suite: PASS, 13 of 13.
 - Package self-check: PASS.
-- Manifest JSON parse: PASS.
-- Bounded index HTML inspection: PASS, zero warnings.
-- Bounded 404 HTML inspection: PASS, zero warnings.
-- Local links and fragments: PASS, 37 checked, zero failures.
-- Exact pinned TestForge line-ending verifier: PASS, zero findings.
+- Index and 404 bounded HTML inspections: PASS, zero warnings.
+- Local link and fragment walk: PASS.
+- Hesperos accessible-Markdown lint: PASS, 8 of 8 authored customer documents.
+- Exact TestForge line-ending policy: PASS, zero findings.
 - Git diff check: PASS.
-- Hesperos accessible-Markdown lint: PASS on authored documentation; one rejected false positive in unchanged MIT boilerplate.
-- Exact-pixel visual inspection: PASS, three of three distinct role assets.
-- Source-level accessibility review: PASS with rendered/assistive-technology limits stated.
-- Adversarial verification: PASS_LOCAL.
-- TestForge manifest and traceability: PASS, 4 risks, 4 scenarios, 4 tests, 6 executions.
-- Test smell scan: 7 low heuristic flags, all the project_snapshot state-preservation helper; inspected and resolved as legitimate discriminating custody assertions.
-- GitHub Actions: NOT RUN by instruction.
-- Live Pages deployment, live-byte equality, rendered browser journey, and social-preview cache: NOT YET TESTED.
+- Rendered browser after deployment: PENDING.
