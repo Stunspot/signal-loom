@@ -255,7 +255,7 @@ class InitializeLoomfileTests(unittest.TestCase):
             package(destination, archive)
             assert_archive_manifest_matches(self, archive, destination.name)
 
-    def test_link_side_effect_then_interrupt_removes_owned_output_and_allows_retry(self) -> None:
+    def test_link_side_effect_then_interrupt_preserves_valid_output_and_blocks_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             destination = root / "project"
@@ -277,13 +277,16 @@ class InitializeLoomfileTests(unittest.TestCase):
                     package(destination, archive)
 
             self.assertTrue(interrupted)
-            self.assertFalse(archive.exists())
+            self.assertTrue(archive.exists())
+            assert_archive_manifest_matches(self, archive, destination.name)
+            archive_before = archive.read_bytes()
             self.assertEqual(manifest_path.read_bytes(), manifest_before)
             self.assertEqual(list(root.glob(f".{archive.name}.*.tmp")), [])
             self.assertEqual(list(root.glob(f".{archive.name}.verify.*")), [])
 
-            package(destination, archive)
-            assert_archive_manifest_matches(self, archive, destination.name)
+            with self.assertRaisesRegex(ValueError, "output already exists"):
+                package(destination, archive)
+            self.assertEqual(archive.read_bytes(), archive_before)
 
     def test_post_link_replacement_is_preserved_during_interrupted_cleanup(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

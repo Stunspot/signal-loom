@@ -177,7 +177,7 @@ Checks a bounded set of static HTML properties: semantic regions, language, titl
 python scripts/package_loomfile.py LOOMFILE OUTPUT.zip
 ```
 
-The output must resolve outside the Loomfile. The packager validates the source state, refuses symbolic links and several secret-like names, preserves required empty directories, and builds a one-root archive at a temporary path. It hashes the exact bytes written to each file entry and places the generated release manifest inside the ZIP; it does not alter the Loomfile's existing `review/release-manifest.json`. It then extracts and validates the archived Loomfile, so a registered source changed after pre-validation is rejected rather than exposed. Only a revalidated ZIP is linked at the requested path. Invalid archived state, write failure, or final-link interruption removes temporary and owned final archive artifacts, preserves the project, and permits retry. An existing or concurrently created output is never overwritten. Its denylist is not a content scanner.
+The output must resolve outside the Loomfile. The packager validates the source state, refuses symbolic links and several secret-like names, preserves required empty directories, and builds a one-root archive at a temporary path. It hashes the exact bytes written to each file entry and places the generated release manifest inside the ZIP; it does not alter the Loomfile's existing `review/release-manifest.json`. It then extracts and validates the archived Loomfile, so a registered source changed after pre-validation is rejected rather than exposed. Only a revalidated ZIP is linked at the requested path. Invalid archived state or write failure removes the unique temporary artifact and preserves the project. A final-link interruption is commit-ambiguous: the packager never deletes the destination automatically, because another process may own or replace that path. Inspect any surviving ZIP; if its embedded manifest validates, keep it. Otherwise choose a new path, or delete the exact invalid output only after confirming custody. An existing or concurrently created output is never overwritten. Its denylist is not a content scanner.
 
 ## Troubleshooting and recovery
 
@@ -208,6 +208,18 @@ Fix source HTML, re-run the inspector, then still perform rendered and accessibi
 ### Packaging refuses content
 
 Remove credentials and secret-like artifacts from the Loomfile. Inspect the complete archive candidate; the filename denylist is deliberately conservative and incomplete. Choose a new ZIP path outside the Loomfile if the requested archive already exists or resolves inside the project.
+
+### Packaging was interrupted during the final link
+
+Do not rerun against or delete the same output path automatically. If the path is absent, retry normally. If it exists, its ownership is unknown: another process may have replaced it. Inspect without modifying it:
+
+```bash
+python -m zipfile -l OUTPUT.zip
+python -m zipfile -e OUTPUT.zip EMPTY_DIRECTORY
+python scripts/validate_loomfile.py EMPTY_DIRECTORY/LOOMFILE_NAME
+```
+
+Compare the extracted project name, source manifest, source hashes, and embedded `review/release-manifest.json` with the intended Loomfile. If the archive is valid and expected, keep it. If it is different or uncertain, leave it untouched and package to a new filename. Delete only after confirming custody. A failed retry against the existing path is expected overwrite protection, not proof that the surviving archive is yours.
 
 ## Privacy, storage, and network behavior
 

@@ -21,7 +21,7 @@ For a newly initialized test project, also run the initializer and `validate_loo
 - the initializer produces the required directory/state skeleton;
 - the Loomfile validator enforces its implemented path, enum, hash, claim-linkage, and stage rules;
 - the HTML inspector enforces its named static structure and risky-pattern rules;
-- the packager rejects output inside the Loomfile, validates source and extracted archive state, preserves required empty directories, excludes symbolic links and named secret-like files, hashes the exact bytes written to every ZIP file payload, embeds the generated release manifest without mutating the Loomfile, refuses existing or competing output, removes partial or owned interrupted archives, and permits a clean retry.
+- the packager rejects output inside the Loomfile, validates source and extracted archive state, preserves required empty directories, excludes symbolic links and named secret-like files, hashes the exact bytes written to every ZIP file payload, embeds the generated release manifest without mutating the Loomfile, refuses existing or competing output, removes partial temporary archives, preserves any destination after an ambiguous final-link interruption, and requires explicit inspection before reuse or removal.
 
 ## What remains separate
 

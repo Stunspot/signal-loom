@@ -45,18 +45,6 @@ def _within(root: Path, candidate: Path) -> bool:
         return False
 
 
-def _file_identity(path: Path) -> tuple[int, int]:
-    stat = path.stat(follow_symlinks=False)
-    return stat.st_dev, stat.st_ino
-
-
-def _matches_identity(path: Path, identity: tuple[int, int] | None) -> bool:
-    if identity is None:
-        return False
-    try:
-        return _file_identity(path) == identity
-    except (FileNotFoundError, OSError):
-        return False
 
 
 def _write_file_entry(archive: zipfile.ZipFile, path: Path, arcname: str) -> dict[str, object]:
@@ -100,7 +88,6 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
 
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary_archive: Path | None = None
-    archive_identity: tuple[int, int] | None = None
 
     try:
         temporary_archive = _temporary_path(output.parent, f".{output.name}.", ".tmp")
@@ -144,16 +131,14 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
                 )
 
         # The completed, revalidated archive is the only committed artifact. A hard
-        # link creates the final name without overwriting a concurrent output.
-        archive_identity = _file_identity(temporary_archive)
+        # link creates the final name without overwriting a concurrent output. Once
+        # that call begins, never delete the destination automatically: an interrupt
+        # may make link completion ambiguous, and another process can replace the
+        # path before cleanup. The caller must inspect any surviving destination.
         os.link(temporary_archive, output)
         _remove_if_present(temporary_archive)
         temporary_archive = None
         return output, len(files) + 1
-    except BaseException:
-        if _matches_identity(output, archive_identity):
-            _remove_if_present(output)
-        raise
     finally:
         if temporary_archive is not None:
             _remove_if_present(temporary_archive)
