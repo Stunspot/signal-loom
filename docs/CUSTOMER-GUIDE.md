@@ -14,7 +14,7 @@ Prerequisites:
 
 - Codex or Claude Code;
 - Git for clone-based installation;
-- Python 3.9+ for initialization, validation, HTML inspection, tests, and packaging;
+- Python 3.10+ for initialization, validation, HTML inspection, tests, and packaging;
 - a writable location for Loomfiles.
 
 ### Codex

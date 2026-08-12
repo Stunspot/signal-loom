@@ -28,7 +28,7 @@ It cannot independently establish that a claim is true outside the supplied evid
 
 ## Supported hosts
 
-The package declares support for **Codex** and **Claude Code**. The same directory is used on both hosts; host discovery and invocation differ. Python 3.9 or newer is optional for the included deterministic helpers and required for the verification commands in this guide. The skill itself has no third-party Python dependencies.
+The package declares support for **Codex** and **Claude Code**. The same directory is used on both hosts; host discovery and invocation differ. Python 3.10 or newer is optional for the included deterministic helpers and required for the verification commands in this guide. The skill itself has no third-party Python dependencies.
 
 No fresh-host installation claim is implied by this repository. Follow the appropriate route and perform the discovery and invocation checks yourself.
 
