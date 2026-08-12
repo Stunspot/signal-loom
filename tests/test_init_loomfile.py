@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import tempfile
 import unittest
 import zipfile
@@ -21,7 +22,9 @@ def manifest_from(archive_path: Path, root_name: str) -> dict:
         )
 
 
-def assert_archive_manifest_matches(test: unittest.TestCase, archive_path: Path, root_name: str) -> None:
+def assert_archive_manifest_matches(
+    test: unittest.TestCase, archive_path: Path, root_name: str
+) -> None:
     with zipfile.ZipFile(archive_path) as archive:
         manifest = json.loads(
             archive.read(f"{root_name}/review/release-manifest.json").decode("utf-8")
@@ -29,7 +32,22 @@ def assert_archive_manifest_matches(test: unittest.TestCase, archive_path: Path,
         for entry in manifest["files"]:
             payload = archive.read(f"{root_name}/{entry['path']}")
             test.assertEqual(len(payload), entry["bytes"], entry["path"])
-            test.assertEqual(hashlib.sha256(payload).hexdigest(), entry["sha256"], entry["path"])
+            test.assertEqual(
+                hashlib.sha256(payload).hexdigest(), entry["sha256"], entry["path"]
+            )
+
+
+def project_snapshot(root: Path) -> list[tuple[str, str, str]]:
+    snapshot: list[tuple[str, str, str]] = []
+    for path in sorted(root.rglob("*"), key=lambda item: item.as_posix().lower()):
+        relative = path.relative_to(root).as_posix()
+        if path.is_dir():
+            snapshot.append(("directory", relative, ""))
+        elif path.is_file():
+            snapshot.append(
+                ("file", relative, hashlib.sha256(path.read_bytes()).hexdigest())
+            )
+    return snapshot
 
 
 class InitializeLoomfileTests(unittest.TestCase):
@@ -57,6 +75,25 @@ class InitializeLoomfileTests(unittest.TestCase):
             assert_archive_manifest_matches(self, archive, destination.name)
             self.assertEqual(manifest_path.read_bytes(), manifest_before)
 
+    def test_fresh_archive_round_trip_preserves_required_directories_and_validates(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            destination = root / "project"
+            archive = root / "project.zip"
+            initialize(destination, "Round-trip validation")
+
+            package(destination, archive)
+
+            with tempfile.TemporaryDirectory() as extracted_directory:
+                with zipfile.ZipFile(archive) as packaged_zip:
+                    packaged_zip.extractall(extracted_directory)
+                extracted_root = Path(extracted_directory) / destination.name
+                for relative in REQUIRED_DIRECTORIES:
+                    self.assertTrue((extracted_root / relative).is_dir(), relative)
+                errors, warnings = validate(extracted_root)
+                self.assertEqual(errors, [])
+                self.assertEqual(warnings, [])
+
     def test_existing_archive_refusal_preserves_archive_and_project(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -73,6 +110,21 @@ class InitializeLoomfileTests(unittest.TestCase):
 
             self.assertEqual(archive.read_bytes(), archive_before)
             self.assertEqual(manifest_path.read_bytes(), manifest_before)
+
+    def test_output_inside_loomfile_is_rejected_without_project_change(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            destination = root / "project"
+            initialize(destination, "Contained output")
+            archive = destination / "review" / "release.zip"
+            before = project_snapshot(destination)
+
+            with self.assertRaisesRegex(ValueError, "output must be outside the Loomfile"):
+                package(destination, archive)
+
+            self.assertFalse(archive.exists())
+            self.assertEqual(project_snapshot(destination), before)
+            self.assertEqual(list(root.glob(f".{archive.name}.*.tmp")), [])
 
     def test_competing_output_is_not_overwritten_and_project_is_preserved(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -154,7 +206,56 @@ class InitializeLoomfileTests(unittest.TestCase):
                 )
             assert_archive_manifest_matches(self, archive, destination.name)
 
-    def test_interrupt_after_final_link_removes_output_and_preserves_project(self) -> None:
+    def test_registered_source_change_is_rejected_by_archived_state_validation(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            destination = root / "project"
+            archive = root / "project.zip"
+            initialize(destination, "Registered source change")
+            source = destination / "sources" / "originals" / "source.txt"
+            source.write_text("before", encoding="utf-8")
+            source_manifest_path = destination / "sources" / "manifest.json"
+            source_manifest = json.loads(source_manifest_path.read_text(encoding="utf-8"))
+            source_manifest["sources"] = [
+                {
+                    "id": "S1",
+                    "path": "sources/originals/source.txt",
+                    "sha256": hashlib.sha256(b"before").hexdigest(),
+                }
+            ]
+            source_manifest_path.write_text(
+                json.dumps(source_manifest, indent=2) + "\n", encoding="utf-8"
+            )
+            real_write = package_module._write_file_entry
+            changed = False
+
+            def mutate_registered_source(
+                packaged_zip: zipfile.ZipFile, path: Path, arcname: str
+            ) -> dict[str, object]:
+                nonlocal changed
+                if not changed and path == source:
+                    source.write_text("after", encoding="utf-8")
+                    changed = True
+                return real_write(packaged_zip, path, arcname)
+
+            with patch.object(
+                package_module, "_write_file_entry", side_effect=mutate_registered_source
+            ):
+                with self.assertRaisesRegex(
+                    ValueError, "Packaged Loomfile validation failed"
+                ):
+                    package(destination, archive)
+
+            self.assertTrue(changed)
+            self.assertFalse(archive.exists())
+            self.assertEqual(list(root.glob(f".{archive.name}.*.tmp")), [])
+            self.assertEqual(list(root.glob(f".{archive.name}.verify.*")), [])
+
+            source.write_text("before", encoding="utf-8")
+            package(destination, archive)
+            assert_archive_manifest_matches(self, archive, destination.name)
+
+    def test_link_side_effect_then_interrupt_removes_owned_output_and_allows_retry(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             destination = root / "project"
@@ -162,17 +263,16 @@ class InitializeLoomfileTests(unittest.TestCase):
             initialize(destination, "Interrupted commit")
             manifest_path = destination / "review" / "release-manifest.json"
             manifest_before = manifest_path.read_bytes()
-            real_remove = package_module._remove_if_present
+            real_link = os.link
             interrupted = False
 
-            def interrupt_after_link(path: Path) -> None:
+            def link_then_interrupt(source: Path, target: Path) -> None:
                 nonlocal interrupted
-                if not interrupted and path.name.startswith(f".{archive.name}."):
-                    interrupted = True
-                    raise KeyboardInterrupt("simulated interruption after final link")
-                real_remove(path)
+                real_link(source, target)
+                interrupted = True
+                raise KeyboardInterrupt("simulated interruption after final link")
 
-            with patch.object(package_module, "_remove_if_present", side_effect=interrupt_after_link):
+            with patch.object(package_module.os, "link", side_effect=link_then_interrupt):
                 with self.assertRaisesRegex(KeyboardInterrupt, "simulated interruption"):
                     package(destination, archive)
 
@@ -180,6 +280,7 @@ class InitializeLoomfileTests(unittest.TestCase):
             self.assertFalse(archive.exists())
             self.assertEqual(manifest_path.read_bytes(), manifest_before)
             self.assertEqual(list(root.glob(f".{archive.name}.*.tmp")), [])
+            self.assertEqual(list(root.glob(f".{archive.name}.verify.*")), [])
 
             package(destination, archive)
             assert_archive_manifest_matches(self, archive, destination.name)

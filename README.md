@@ -116,7 +116,7 @@ python scripts/inspect_infographic_html.py ./my-story/output/web/index.html
 python scripts/package_loomfile.py ./my-story ./my-story.zip
 ```
 
-The package command validates state, rejects symbolic links and several secret-like filenames, and builds a one-root ZIP at a same-directory temporary path. It hashes the exact byte stream written to each ZIP entry, writes that release manifest inside the archive, and exposes the final ZIP only after construction succeeds. The Loomfile itself remains unchanged. Write or commit failures remove temporary and final archive artifacts; an existing or concurrently created output is never overwritten. The destination filesystem must support same-directory temporary files and hard links. The packager does not scan file contents for secrets or publish the archive.
+The package command requires an output path outside the Loomfile, validates the source state, rejects symbolic links and several secret-like filenames, and builds a one-root ZIP at a same-directory temporary path. It preserves required empty directories, hashes the exact byte stream written to each file entry, embeds that release manifest, extracts the completed candidate, and revalidates the archived Loomfile before exposing the final ZIP. The Loomfile itself remains unchanged. Invalid archived state, write failure, or final-link interruption removes temporary and owned final archive artifacts; an existing or concurrently created output is never overwritten. The destination filesystem must support same-directory temporary files and hard links. The packager does not scan file contents for secrets or publish the archive.
 
 ## Inputs and outputs
 

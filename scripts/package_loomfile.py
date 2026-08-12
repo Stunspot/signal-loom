@@ -37,6 +37,23 @@ def _remove_if_present(path: Path) -> None:
         pass
 
 
+def _within(root: Path, candidate: Path) -> bool:
+    try:
+        candidate.relative_to(root)
+        return True
+    except ValueError:
+        return False
+
+
+def _same_file(left: Path | None, right: Path) -> bool:
+    if left is None:
+        return False
+    try:
+        return left.samefile(right)
+    except (FileNotFoundError, OSError):
+        return False
+
+
 def _write_file_entry(archive: zipfile.ZipFile, path: Path, arcname: str) -> dict[str, object]:
     value = hashlib.sha256()
     byte_count = 0
@@ -51,6 +68,8 @@ def _write_file_entry(archive: zipfile.ZipFile, path: Path, arcname: str) -> dic
 def package(root: Path, output: Path) -> tuple[Path, int]:
     root = root.expanduser().resolve()
     output = output.expanduser().resolve()
+    if _within(root, output):
+        raise ValueError(f"output must be outside the Loomfile: {output}")
     if output.exists() or output.is_symlink():
         raise ValueError(f"output already exists: {output}")
 
@@ -59,10 +78,14 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
         raise ValueError("Loomfile validation failed:\n- " + "\n- ".join(errors))
 
     manifest_path = root / "review" / "release-manifest.json"
+    directories: list[Path] = []
     files: list[Path] = []
     for path in sorted(root.rglob("*"), key=lambda item: item.as_posix().lower()):
         if path.is_symlink():
             raise ValueError(f"symbolic links are not packaged: {path.relative_to(root)}")
+        if path.is_dir():
+            directories.append(path)
+            continue
         if not path.is_file():
             continue
         if path.name.lower() in DENIED_NAMES or path.suffix.lower() in DENIED_SUFFIXES:
@@ -83,6 +106,9 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
             compression=zipfile.ZIP_DEFLATED,
             compresslevel=9,
         ) as archive:
+            for path in directories:
+                relative = path.relative_to(root).as_posix()
+                archive.writestr(f"{root.name}/{relative}/", b"")
             for path in files:
                 relative = path.relative_to(root).as_posix()
                 manifest_entries.append(
@@ -99,15 +125,28 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
             ).encode("utf-8")
             archive.writestr(f"{root.name}/review/release-manifest.json", manifest_bytes)
 
-        # The completed archive is the only committed artifact. A hard link creates
-        # the final name without overwriting a path created after the initial guard.
+        with tempfile.TemporaryDirectory(
+            dir=output.parent, prefix=f".{output.name}.verify."
+        ) as verification_directory:
+            with zipfile.ZipFile(temporary_archive, "r") as archive:
+                archive.extractall(verification_directory)
+            extracted_root = Path(verification_directory) / root.name
+            packaged_errors, _ = validate(extracted_root)
+            if packaged_errors:
+                raise ValueError(
+                    "Packaged Loomfile validation failed:\n- "
+                    + "\n- ".join(packaged_errors)
+                )
+
+        # The completed, revalidated archive is the only committed artifact. A hard
+        # link creates the final name without overwriting a concurrent output.
         os.link(temporary_archive, output)
         output_committed = True
         _remove_if_present(temporary_archive)
         temporary_archive = None
         return output, len(files) + 1
     except BaseException:
-        if output_committed:
+        if output_committed or _same_file(temporary_archive, output):
             _remove_if_present(output)
         raise
     finally:

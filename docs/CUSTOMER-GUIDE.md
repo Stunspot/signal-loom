@@ -177,7 +177,7 @@ Checks a bounded set of static HTML properties: semantic regions, language, titl
 python scripts/package_loomfile.py LOOMFILE OUTPUT.zip
 ```
 
-Validates first, refuses symbolic links and several secret-like names, and builds a one-root archive at a temporary path. It hashes the exact bytes written to each archive entry and places the generated release manifest inside the ZIP; it does not alter the Loomfile's existing `review/release-manifest.json`. Only a completed ZIP is exposed at the requested path. Write or final-link failure removes temporary/final archive artifacts, preserves the project, and permits retry. An existing or concurrently created output is never overwritten. Its denylist is not a content scanner.
+The output must resolve outside the Loomfile. The packager validates the source state, refuses symbolic links and several secret-like names, preserves required empty directories, and builds a one-root archive at a temporary path. It hashes the exact bytes written to each file entry and places the generated release manifest inside the ZIP; it does not alter the Loomfile's existing `review/release-manifest.json`. It then extracts and validates the archived Loomfile, so a registered source changed after pre-validation is rejected rather than exposed. Only a revalidated ZIP is linked at the requested path. Invalid archived state, write failure, or final-link interruption removes temporary and owned final archive artifacts, preserves the project, and permits retry. An existing or concurrently created output is never overwritten. Its denylist is not a content scanner.
 
 ## Troubleshooting and recovery
 
@@ -207,7 +207,7 @@ Fix source HTML, re-run the inspector, then still perform rendered and accessibi
 
 ### Packaging refuses content
 
-Remove credentials and secret-like artifacts from the Loomfile. Inspect the complete archive candidate; the filename denylist is deliberately conservative and incomplete. Choose a new ZIP path if the requested archive already exists.
+Remove credentials and secret-like artifacts from the Loomfile. Inspect the complete archive candidate; the filename denylist is deliberately conservative and incomplete. Choose a new ZIP path outside the Loomfile if the requested archive already exists or resolves inside the project.
 
 ## Privacy, storage, and network behavior
 

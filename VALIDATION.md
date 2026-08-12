@@ -12,7 +12,7 @@ python -m unittest discover -s tests -v
 python scripts/inspect_infographic_html.py docs/index.html
 ```
 
-For a newly initialized test project, also run the initializer and `validate_loomfile.py`. For packaging, use a new output path and inspect the resulting one-root ZIP and release manifest.
+For a newly initialized test project, also run the initializer and `validate_loomfile.py`. For packaging, use a new output path outside the Loomfile, extract the resulting one-root ZIP, validate the extracted root, and inspect its release manifest.
 
 ## What these checks can establish
 
@@ -21,7 +21,7 @@ For a newly initialized test project, also run the initializer and `validate_loo
 - the initializer produces the required directory/state skeleton;
 - the Loomfile validator enforces its implemented path, enum, hash, claim-linkage, and stage rules;
 - the HTML inspector enforces its named static structure and risky-pattern rules;
-- the packager validates, excludes symbolic links and named secret-like files, hashes the exact bytes written to every ZIP payload, embeds the generated release manifest without mutating the Loomfile, refuses existing or competing output, removes partial archives, and permits a clean retry.
+- the packager rejects output inside the Loomfile, validates source and extracted archive state, preserves required empty directories, excludes symbolic links and named secret-like files, hashes the exact bytes written to every ZIP file payload, embeds the generated release manifest without mutating the Loomfile, refuses existing or competing output, removes partial or owned interrupted archives, and permits a clean retry.
 
 ## What remains separate
 

@@ -8,7 +8,7 @@ All notable current-package changes are documented here. Historical release arti
 - Added three distinct role-specific visual assets and reproducible asset construction.
 - Corrected product/version wording and social metadata.
 - Added explicit install verification, recovery, update, removal, data cleanup, privacy, network, security, limitation, provenance, and evidence boundaries.
-- Made packaging a single-artifact commit: archive payloads are hashed while written, the release manifest lives inside the ZIP, the Loomfile remains unchanged, and fault-injection regressions cover write failure, post-link interruption, concurrent output, cleanup, payload identity, and retry.
+- Made packaging a revalidated single-artifact commit: the output must be outside the Loomfile, required empty directories survive extraction, file payloads are hashed while written, the release manifest lives inside the ZIP, archived state is validated before exposure, the Loomfile remains unchanged, and fault-injection regressions cover write failure, link-side-effect interruption, registered-source mutation, concurrent output, cleanup, payload identity, and retry.
 
 ## 0.1.0
 
