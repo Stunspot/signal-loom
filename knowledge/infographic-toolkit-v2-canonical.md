@@ -9,11 +9,11 @@ This is a conditional library, not an entry point or prompt menu. The Signal Loo
 - [2. Infographic Forge — Page Constructor](#2-infographic-forge--page-constructor)
 - [3. Infographic Theme & Palette Reworker](#3-infographic-theme--palette-reworker)
 - [4. Hooksmith & Microcopy Polish](#4-hooksmith--microcopy-polish)
-- [5. Viralizer](#infographic-viralizer)
-- [6. Toysmith](#infographic-toy-adder)
+- [5. Viralizer](#5-viralizer)
+- [6. Toysmith](#6-toysmith)
 - [7. Platformizer](#7-platformizer)
 - [8. Carouselizer](#8-carouselizer)
-- [9. Diagnostic Reviewer](#infographic-diagnostic-reviewer)
+- [9. Diagnostic Reviewer](#9-diagnostic-reviewer)
 
 
 ## 1. Story Spine Builder

@@ -1,30 +1,23 @@
-# Signal Loom site source
+# Site source and boundaries
 
-The static project site is published from this `docs/` directory.
+This directory is the complete static source for `https://stunspot.github.io/signal-loom/`.
 
-## Source and evidence boundary
+## Runtime
 
-The site describes the public contest edition in this repository. Its product claims are derived from:
+- `index.html` is the customer journey.
+- `404.html` is the repository-specific recovery page.
+- `style.css` contains the local responsive visual system.
+- `assets/signal-loom-pages-hero.png` is the 1200×800 Pages hero.
+- `assets/signal-loom-social-card.png` is the 1200×630 Open Graph/social card.
+- The README uses the separate 1600×720 `assets/signal-loom-readme-hero.png`.
+- There is no JavaScript, remote font, analytics, telemetry, form, iframe, or required third-party runtime.
 
-- `SKILL.md`;
-- `knowledge/operating-doctrine.md`;
-- `knowledge/claim-and-currentness-doctrine.md`;
-- `knowledge/representation-and-chart-integrity.md`;
-- the included Loomfile initialization, validation, HTML inspection, and packaging tools.
+## Content boundary
 
-The page does not claim that static inspection proves security or accessibility conformance, that a built artifact is reviewed or approved, that approved export means publication, that the product invents missing evidence, or that every host can install the standalone source independently.
+The site explains product purpose, audience, capabilities, limits, Codex and Claude Code installation, verification, first use, workflow, outputs, configuration, troubleshooting, recovery, update, removal, data cleanup, privacy, network behavior, security, accessibility limits, provenance, support, contribution, license, and evidence status. The repository customer guide remains the detailed operational reference.
 
-## Files
+The live repository and live site must be checked after deployment. A source file, successful local check, workflow transcript, or HTTP 200 does not by itself establish rendered quality, navigation behavior, correct live assets, accessibility conformance, or publication success.
 
-- `index.html` — semantic single-page project overview;
-- `style.css` — responsive presentation and accessibility treatment;
-- `assets/signal-loom-hero.png` — generated 1600×900 raster hero artwork;
-- `.nojekyll` — direct static-file serving marker.
+## Accessibility boundary
 
-## Deployment
-
-`.github/workflows/deploy-pages.yml` uploads this directory with GitHub's official Pages Actions. Repository Pages must be configured to use **GitHub Actions** before the first deployment can publish.
-
-## Review notes
-
-The page uses one H1, semantic landmarks, a skip link, visible keyboard focus, descriptive links, meaningful alternative text, responsive layout, and reduced-motion handling. These checks support structural accessibility only; they are not a claim of formal accessibility conformance, browser coverage, security, professional fitness, or representative-user success.
+The source includes semantic regions, one `h1`, ordered headings, alt text, a skip link, visible keyboard focus, reflow layouts, horizontally scrollable stage content, and reduced-motion treatment. These are source-level properties. Formal accessibility conformance requires separate rendered keyboard, zoom/reflow, contrast, screen-reader, and assistive-technology testing.

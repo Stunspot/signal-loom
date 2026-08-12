@@ -6,7 +6,7 @@
   "entrypoint": "SKILL.md",
   "hosts": ["codex", "claude"],
   "runtime": {
-    "python": ">=3.9",
+    "python": ">=3.10",
     "dependencies": []
   },
   "publication": "manual_only",
