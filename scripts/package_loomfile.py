@@ -11,7 +11,10 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from validate_loomfile import validate
+try:
+    from .validate_loomfile import validate
+except ImportError:  # Direct script execution.
+    from validate_loomfile import validate
 
 
 DENIED_NAMES = {".env", "id_rsa", "id_ed25519", "credentials", "credentials.json"}
@@ -29,6 +32,8 @@ def digest(path: Path) -> str:
 def package(root: Path, output: Path) -> tuple[Path, int]:
     root = root.expanduser().resolve()
     output = output.expanduser().resolve()
+    if output.exists() or output.is_symlink():
+        raise ValueError(f"output already exists: {output}")
     errors, warnings = validate(root)
     if errors:
         raise ValueError("Loomfile validation failed:\n- " + "\n- ".join(errors))
@@ -57,8 +62,6 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
     files = [path for path in files if path != manifest_path] + [manifest_path]
 
     output.parent.mkdir(parents=True, exist_ok=True)
-    if output.exists():
-        raise ValueError(f"output already exists: {output}")
     with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for path in files:
             archive.write(path, f"{root.name}/{path.relative_to(root).as_posix()}")
