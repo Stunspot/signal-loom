@@ -19,6 +19,14 @@ class PublicPresentationTests(unittest.TestCase):
             css,
         )
 
+    def test_social_metadata_uses_deployable_jpg(self) -> None:
+        page = (ROOT / "docs" / "index.html").read_text(encoding="utf-8")
+        card = ROOT / "docs" / "assets" / "signal-loom-social-card.jpg"
+        self.assertTrue(card.is_file())
+        self.assertLess(card.stat().st_size, 1024 * 1024)
+        self.assertEqual(2, page.count("signal-loom-social-card.jpg"))
+        self.assertNotIn("signal-loom-social-card.png", page)
+
     def test_readme_leads_with_the_product(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         opening = readme[:600]

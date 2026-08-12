@@ -2,12 +2,12 @@
     "manifest_version":  "1.0",
     "target":  {
                    "name":  "Signal Loom final documentation and presentation candidate",
-                   "revision":  "1187defe54242e7e705868ebea1ba71ece6e8dde877c98eecd801867c5b5540a",
+                   "revision":  "4105d1b5f579cf58f0a6d696f69965f87ba2d136b40f8af1bc486b1c777f9a85",
                    "target_class":  "release_candidate"
                },
     "scope":  {
                   "included":  [
-                                   "Final repository product, documentation, Pages source, visual assets, and local verification at candidate fingerprint 1187defe54242e7e705868ebea1ba71ece6e8dde877c98eecd801867c5b5540a",
+                                   "Final repository product, documentation, Pages source, visual assets, and local verification at candidate fingerprint 4105d1b5f579cf58f0a6d696f69965f87ba2d136b40f8af1bc486b1c777f9a85",
                                    "Customer journey, infographic-first positioning, packaging custody, static accessibility, three visual roles, and publication readiness"
                                ],
                   "excluded":  [
@@ -29,13 +29,13 @@
                           "observed":  [
                                            {
                                                "id":  "C-001",
-                                               "statement":  "The final product and documentation bytes match candidate fingerprint 1187defe54242e7e705868ebea1ba71ece6e8dde877c98eecd801867c5b5540a.",
+                                               "statement":  "The final product and documentation bytes match candidate fingerprint 4105d1b5f579cf58f0a6d696f69965f87ba2d136b40f8af1bc486b1c777f9a85.",
                                                "basis":  "FINGERPRINT.sha256",
                                                "confidence":  "high"
                                            },
                                            {
                                                "id":  "C-002",
-                                               "statement":  "Thirteen package and presentation tests, package self-check, both HTML inspections, local navigation checks, and the pinned line-ending verifier pass.",
+                                               "statement":  "Fourteen package and presentation tests, package self-check, both HTML inspections, local navigation checks, and the pinned line-ending verifier pass.",
                                                "basis":  "verification-summary.md and raw evidence",
                                                "confidence":  "high"
                                            },

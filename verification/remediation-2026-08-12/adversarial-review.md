@@ -1,9 +1,9 @@
 # Adversarial verification
 
 Date: 2026-08-12
-Candidate fingerprint: 1187defe54242e7e705868ebea1ba71ece6e8dde877c98eecd801867c5b5540a
-Documentation fingerprint: e81e5ee4c62ec44be7767e5ff7c1a2319f0699e8d6b609dcc0f37ca9077db59a
-Presentation fingerprint: 7ad424dc3649cd144fc610800a013cff0cc5a8a225e128d3068a47de455af4a3
+Candidate fingerprint: 4105d1b5f579cf58f0a6d696f69965f87ba2d136b40f8af1bc486b1c777f9a85
+Documentation fingerprint: 3cbcc1d89347d6fc04727736cd173007f2ac0564d9dce9d684b8b5b24233defd
+Presentation fingerprint: 45304a55badd865ed48bc1d6bcef3ee321ec422e6b24efba47863ea693634c34
 Verdict: PASS_LOCAL with post-deployment rendered verification required.
 
 Challenges and results:
@@ -14,6 +14,6 @@ Challenges and results:
 - Narrow viewport: source geometry retains a 1rem gutter and mobile grid breakpoints; the computed content width is 288 pixels at a 320-pixel viewport.
 - Unsupported capability inflation: rejected. The README preserves manual publication, evidence authority, static-check, security, accessibility, and factual limits.
 - Broken navigation: rejected. Local file and same-page fragment checks pass; both HTML files pass bounded inspection.
-- Unrelated work: preserved. The untracked docs/assets/signal-loom-social-card.jpg is not staged or modified.
+- Social delivery format: repaired. The accepted 1200x630 JPEG is 209 KB, the Pages source metadata names it twice, and a regression rejects a return to the 1.83 MB PNG source master.
 
-Thirteen unit tests, package self-check, both HTML inspections, eight Hesperos lint passes, local link/fragment checks, exact TestForge line-ending verification, and diff hygiene pass. The remaining decisive check is the corrected live render in the browser state that produced the screenshot.
+Fourteen unit tests, package self-check, both HTML inspections, eight Hesperos lint passes, local link/fragment checks, exact TestForge line-ending verification, and diff hygiene pass. The remaining decisive check is the corrected live render in the browser state that produced the screenshot.

@@ -8,7 +8,8 @@ This directory is the complete static source for `https://stunspot.github.io/sig
 - `404.html` is the repository-specific recovery page.
 - `style.css` contains the local responsive visual system.
 - `assets/signal-loom-pages-hero.png` is the 1200×800 Pages hero.
-- `assets/signal-loom-social-card.png` is the 1200×630 Open Graph/social card.
+- `assets/signal-loom-social-card.jpg` is the deployable 1200×630 Open Graph/social card (209 KB).
+- `assets/signal-loom-social-card.png` is the lossless source master and is not wired to social metadata because its 1.83 MB size exceeded the upload limit encountered during publication.
 - The README uses the separate 1600×720 `assets/signal-loom-readme-hero.png`.
 - There is no JavaScript, remote font, analytics, telemetry, form, iframe, or required third-party runtime.
 
