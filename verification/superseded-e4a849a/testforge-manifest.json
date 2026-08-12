@@ -1,48 +1,47 @@
 {
     "manifest_version":  "1.0",
     "target":  {
-                   "name":  "Signal Loom final documentation and presentation candidate",
-                   "revision":  "82423dc89c7ad9ad754c963fe57ad43191722218512d1040cfd16513f7293b66",
+                   "name":  "Signal Loom frozen product and documentation candidate readiness for publication",
+                   "revision":  "4b88d1e7c7284797227b71497913b51b26f28156",
                    "target_class":  "release_candidate"
                },
     "scope":  {
                   "included":  [
-                                   "Final repository product, documentation, Pages source, visual assets, and local verification at candidate fingerprint 82423dc89c7ad9ad754c963fe57ad43191722218512d1040cfd16513f7293b66",
-                                   "Customer journey, infographic-first positioning, packaging custody, static accessibility, three visual roles, and publication readiness"
+                                   "59 governed product, documentation, Pages, workflow, and visual files at fingerprint 2915a01f8e71be06945993fee6b41889e263f3f8b9c3969495799bcda47f0e97",
+                                   "customer journey, packaging custody, static accessibility, three visual roles, publication route"
                                ],
                   "excluded":  [
-                                   "Fresh-host Codex and Claude Code discovery, invocation, and health",
-                                   "Rendered browser, social-preview cache, screen-reader, and formal accessibility conformance",
-                                   "Active security testing",
-                                   "Protected main update, Pages deployment, and post-deployment live verification"
+                                   "fresh-host Codex and Claude Code invocation",
+                                   "GUI browser, screenshot, screen-reader, and formal accessibility conformance",
+                                   "active security testing",
+                                   "protected GitHub merge, Pages deployment, and post-deployment live verification (next release phase)"
                                ],
                   "constraints":  [
-                                      "Do not launch a browser; only a pre-existing browser may be used and none is available after restart",
-                                      "Do not invoke GitHub-hosted Actions; user reports testing minutes exhausted",
-                                      "Local non-production checks only until publication"
+                                      "No GUI browser or screenshot tooling",
+                                      "Publication must preserve required branch status and use public standard runners only"
                                   ],
                   "safety_boundary":  [
-                                          "Local non-production verification and publication of an exact reviewed candidate branch"
+                                          "local non-production verification plus authorized public GitHub publication"
                                       ]
               },
     "claim_custody":  {
                           "observed":  [
                                            {
                                                "id":  "C-001",
-                                               "statement":  "The final product and documentation bytes match candidate fingerprint 82423dc89c7ad9ad754c963fe57ad43191722218512d1040cfd16513f7293b66.",
-                                               "basis":  "FINGERPRINT.sha256",
+                                               "statement":  "All 59 governed files match the current fingerprint.",
+                                               "basis":  "FINGERPRINT.sha256 and fingerprint-records.txt",
                                                "confidence":  "high"
                                            },
                                            {
                                                "id":  "C-002",
-                                               "statement":  "Eleven package tests, package self-check, both HTML inspections, 37 local navigation targets, and the pinned line-ending verifier pass.",
-                                               "basis":  "verification-summary.md and raw evidence",
+                                               "statement":  "Eleven package tests pass on revision 4b88d1e, including ambiguous final-link and competitor-replacement interleavings.",
+                                               "basis":  "raw/unit-tests.txt",
                                                "confidence":  "high"
                                            },
                                            {
                                                "id":  "C-003",
-                                               "statement":  "Three distinct final-sized visual files were opened and their actual pixels approved; the social card visibly contains the exact product title and identifying line.",
-                                               "basis":  "visual-review.md and raw/visual-assets.txt",
+                                               "statement":  "Three distinct visual files were opened and their actual pixels approved.",
+                                               "basis":  "raw/visual-assets.txt",
                                                "confidence":  "high"
                                            }
                                        ],
@@ -56,9 +55,9 @@
                                              {
                                                  "id":  "C-004",
                                                  "statement":  "Deployed candidate rendering and live repository social preview are not yet observed.",
-                                                 "basis":  "candidate is not yet on main and browser launch is prohibited",
+                                                 "basis":  "candidate has not yet been merged and deployed",
                                                  "confidence":  "high",
-                                                 "consequence":  "repository cannot receive final live PASS until post-publication browser verification"
+                                                 "consequence":  "must be verified after publication"
                                              }
                                          ]
                       },
@@ -257,7 +256,7 @@
                       "scenario_ids":  [
                                            "S-DOCS"
                                        ],
-                      "path":  "verification/remediation-2026-08-12/documentation-review.md",
+                      "path":  "verification/remediation-2026-08-12/hesperos-documentation-review.md",
                       "status":  "passed",
                       "execution_id":  "E-002"
                   },
@@ -308,7 +307,7 @@
                            "working_directory":  "E:/Github/.portfolio-remediation-019ff22b/signal-loom",
                            "status":  "passed",
                            "exit_code":  0,
-                           "raw_evidence":  "verification/remediation-2026-08-12/documentation-review.md"
+                           "raw_evidence":  "verification/remediation-2026-08-12/hesperos-documentation-review.md"
                        },
                        {
                            "id":  "E-003",
@@ -360,22 +359,34 @@
     "findings":  [
                      {
                          "id":  "F-001",
-                         "classification":  "TEST_DEFECT",
+                         "classification":  "TOOLING_FAILURE",
                          "severity":  "low",
-                         "statement":  "The heuristic smell scanner labels uses of the local project_snapshot helper as snapshot assertions.",
+                         "statement":  "Composite evidence wrappers failed independently of the product; direct executions and a non-function Start-Process capture separated the cause.",
                          "evidence":  [
-                                          "raw/test-smells.json",
-                                          "tests/test_init_loomfile.py"
+                                          "raw/tooling-failures.txt",
+                                          "raw/unit-tests.txt"
                                       ],
                          "confidence":  "high",
-                         "next_action":  "None: direct inspection shows these assertions compare complete filesystem state before and after destructive-edge simulations; they are discriminating custody checks, not broad golden snapshots.",
+                         "next_action":  "Retain direct/non-function capture route; do not reuse failed wrappers.",
+                         "status":  "resolved"
+                     },
+                     {
+                         "id":  "F-002",
+                         "classification":  "TEST_DEFECT",
+                         "severity":  "low",
+                         "statement":  "Initial local-link checker misclassified GitHub Pages project-base URLs as filesystem-root paths.",
+                         "evidence":  [
+                                          "raw/local-links.txt"
+                                      ],
+                         "confidence":  "high",
+                         "next_action":  "Map /signal-loom/ to docs/ in the checker oracle.",
                          "status":  "resolved"
                      }
                  ],
     "residual_risks":  [
                            {
                                "id":  "RR-001",
-                               "statement":  "Fresh-host Codex and Claude Code discovery, invocation, and health are not executed.",
+                               "statement":  "Fresh-host Codex/Claude discovery, invocation, and health are not executed.",
                                "treatment":  "Documentation requires separate observable checks and makes no fresh-host success claim.",
                                "owner":  "maintainer",
                                "revisit_condition":  "fresh-host release qualification"
@@ -383,34 +394,34 @@
                            {
                                "id":  "RR-002",
                                "statement":  "Rendered browser and assistive-technology behavior are not tested in this constrained run.",
-                               "treatment":  "Static accessibility is bounded; rendered verdict remains pending an existing authorized browser.",
+                               "treatment":  "Static accessibility is bounded; live/rendered verdict remains pending publication and authorized tooling.",
                                "owner":  "maintainer",
-                               "revisit_condition":  "candidate is live and an existing browser is available"
+                               "revisit_condition":  "candidate is live and browser inspection is authorized"
                            },
                            {
                                "id":  "RR-003",
-                               "statement":  "Protected main update, Pages deployment, and exact live verification have not run.",
-                               "treatment":  "Push the exact reviewed candidate branch without opening a PR or triggering Actions; main remains blocked pending explicit ruleset handling.",
+                               "statement":  "Required GitHub status, protected merge, Pages deployment, and exact live verification have not run yet.",
+                               "treatment":  "Execute only after this evidence commit is published; branch protection gates merge and final repository PASS remains unavailable until live verification succeeds.",
                                "owner":  "maintainer",
-                               "revisit_condition":  "candidate branch is published"
+                               "revisit_condition":  "evidence commit is pushed to the public feature branch"
                            }
                        ],
     "review":  {
                    "status":  "REVIEW_PASS_WITH_CONDITIONS",
                    "findings":  [
-                                    "Local candidate passes. Publish the exact branch without GitHub Actions; main, Pages deployment, rendered browser journey, live assets, and social-preview cache remain post-publication gates."
+                                    "Run required public GitHub status, merge exact candidate, deploy Pages, and verify exact live bytes/navigation before repository PASS."
                                 ],
-                   "reviewer":  "TestForge adversarial review applied after Hesperos and accessibility reviews"
+                   "reviewer":  "verification-reviewer separate adversarial lens, same agent context"
                },
     "decision":  {
                      "status":  "READY_WITH_RESIDUAL_RISK",
                      "basis":  [
-                                   "All local decision-critical product, package, documentation, static accessibility, visual, link, and line-ending checks pass for exact candidate fingerprint.",
-                                   "Signal Loom now leads with infographic production and uses three inspected role-specific generated artworks; the programmed renderer is removed.",
-                                   "GitHub-hosted Actions and browser launch are prohibited, so main/deployment/live proof remain external gates."
+                                   "All local decision-critical product, package, documentation, static accessibility, visual, link, and line-ending checks pass for exact revision and fingerprint.",
+                                   "The TOCTOU cleanup design was replaced with a destination-preserving commit-ambiguity contract and two discriminating interruption regressions.",
+                                   "Public standard GitHub runners are free; publication is authorized but hosted status/deployment/live evidence are next-stage conditions."
                                ],
                      "authority_required":  [
-                                                "No further authority is required to publish the reviewed candidate branch. Updating protected main without a required hosted status requires explicit user authorization or user action."
+                                                "Existing user authorization covers public branch push, pull request, merge after required checks, and Pages deployment."
                                             ]
                  }
 }

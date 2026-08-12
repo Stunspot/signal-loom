@@ -1,13 +1,12 @@
-# Documentation accessibility review - Signal Loom
+# Documentation accessibility review
 
-Receipt: `SIGNAL-LOOM-A11Y-4b88d1e-2915a01f-20260812`
+Date: 2026-08-12
+Documentation fingerprint: 963120c6d672d3444c4225fb868c8ed3e09a4c170e0e93d5bfdddc621ab1bd45
+Presentation fingerprint: b89e7829a934410c93b930d6b72ba5b477a8ffa9af366ead47990b65b9a34fb1
+Result: PASS for inspected source-level accessibility; rendered keyboard, zoom/reflow, screen-reader, and assistive-technology behavior remains NOT TESTED.
 
-- Bound commit: `4b88d1e7c7284797227b71497913b51b26f28156`
-- Bound fingerprint: `2915a01f8e71be06945993fee6b41889e263f3f8b9c3969495799bcda47f0e97`
-- Verdict: `REVIEW_PASS_WITH_CONDITIONS`
+The site has a skip link, semantic header/nav/main/section/footer structure, one H1, ordered headings, descriptive link text, visible focus, responsive layouts, a mobile single-column stage flow, reduced-motion handling, no required JavaScript, and no remote font/runtime dependency. Local navigation and same-page fragments exercised: 37, failures: 0. Bounded HTML inspection passed index and 404 with zero warnings.
 
-Static source review passes: literal audience/task labels; one H1 per page; ordered headings; landmarks; a skip link; native links/details; visible focus; narrow-screen navigation that remains reachable; reduced-motion handling; meaningful image alternatives; no color-only essential meaning; custom 404 recovery; and 37 resolving local/Pages-base targets and fragments. Recomputed contrast remains above AA text thresholds: primary 17.9-18.9:1, muted 9.3-11:1, quiet 6.768:1, cyan 11.98:1, buttons 9.1-12.1:1, callout 14.78:1, prose 13.3:1, and focus 11.21:1.
+Computed contrast ratios: body 15.29:1; muted text 6.35:1; links 6.85:1; eyebrow 5.02:1; paper links 7.58:1; primary button 8.97:1; footer links 12.24:1; focus indicator 7.68:1.
 
-The new ambiguous-package-commit recovery is cognitively and operationally complete: it says what not to do, distinguishes absent versus surviving output, supplies read-only list/extract/validate commands, names comparison cues, preserves uncertain ownership, and gives a safe new-filename route.
-
-Condition: deployed browser layout, keyboard traversal, zoom/reflow, accessibility tree, screen-reader output, and formal conformance are NOT TESTED. No claim is made for them. Any governed-file change invalidates this review.
+The README and Pages heroes have descriptive alternatives. The social metadata alternative names the product, its infographic function, and the depicted source-to-output relationship. The illustrations contain no required instructional text; the social card's identifying text is also supplied in HTML metadata.

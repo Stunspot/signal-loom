@@ -1,10 +1,10 @@
 # Signal Loom customer guide
 
-This guide takes Signal Loom from installation through removal. It is operational documentation for the `0.1.0` package, not a claim that every host/environment combination has been independently installed and exercised.
+Signal Loom makes infographics from supplied research, reports, notes, and data. This guide takes the package from installation through removal. It is operational documentation for the `0.1.0` package, not a claim that every host/environment combination has been independently installed and exercised.
 
 ## Choose the product when
 
-Use Signal Loom when you have supplied evidence and need a coherent visual explanation whose claims, narrative, representations, outputs, and review state remain inspectable. Typical users include researchers, analysts, educators, communicators, product teams, and designers working with source-bound material.
+Use Signal Loom when you have supplied evidence and need an infographic whose claims, narrative, representations, outputs, and review state remain inspectable. Typical users include researchers, analysts, educators, communicators, product teams, and designers working with source-bound material.
 
 Do not use it as an autonomous fact finder, generic image generator, HTML sanitizer, publishing bot, compliance certification system, or substitute for domain review.
 
@@ -95,7 +95,7 @@ A good brief supplies:
 Example:
 
 ```text
-Use $signal-loom with the supplied report and CSV. The audience is city budget staff; the intended change is understanding which maintenance delays create compounding cost. Build a semantic web visual story only. Treat the report as dated to 2026-06-30, do not fetch outside evidence, do not publish, and leave disputed claims visibly unresolved.
+Use $signal-loom with the supplied report and CSV. The audience is city budget staff; the intended change is understanding which maintenance delays create compounding cost. Build a semantic web infographic only. Treat the report as dated to 2026-06-30, do not fetch outside evidence, do not publish, and leave disputed claims visibly unresolved.
 ```
 
 Signal Loom should return or create an inspectable project—not merely a polished image. Expected outputs include a source manifest, brief, claim ledger, story spine, visual plan, web artifact, diagnostic record, and explicit unproved layers.

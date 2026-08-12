@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Install, use, verify, and govern Signal Loom: a source-bound visual-story production skill for Codex and Claude Code.">
-  <meta name="theme-color" content="#06131c">
+  <meta name="description" content="Install and use Signal Loom to make source-bound infographics from supplied research, reports, notes, and data.">
+  <meta name="theme-color" content="#17130f">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Signal Loom">
-  <meta property="og:description" content="Evidence-to-visual story production. Shape the story and keep every thread inspectable.">
+  <meta property="og:description" content="Makes source-bound infographics from research and data.">
   <meta property="og:url" content="https://stunspot.github.io/signal-loom/">
   <meta property="og:image" content="https://stunspot.github.io/signal-loom/assets/signal-loom-social-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Signal Loom. Evidence-to-visual story production. Source, claim, story, form, and review are connected by a visible causal thread.">
+  <meta property="og:image:alt" content="Signal Loom. Makes source-bound infographics from research and data. A printing loom turns connected evidence cards into a finished infographic.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Signal Loom">
-  <meta name="twitter:description" content="Shape the story. Keep every thread inspectable.">
+  <meta name="twitter:description" content="Makes source-bound infographics from research and data.">
   <meta name="twitter:image" content="https://stunspot.github.io/signal-loom/assets/signal-loom-social-card.png">
-  <title>Signal Loom · Evidence-to-visual story production</title>
+  <title>Signal Loom · Source-bound infographic production</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -34,9 +34,9 @@
   <main id="main">
     <section class="hero" id="top">
       <div class="hero-copy">
-        <p class="eyebrow">Evidence-to-visual story production</p>
-        <h1>Shape the story. Keep every thread inspectable.</h1>
-        <p class="lede">Signal Loom turns supplied research, reports, notes, or data into coherent visual stories while preserving the path from source to claim to narrative to representation to review.</p>
+        <p class="eyebrow">Infographic production</p>
+        <h1>Make the infographic. Keep the evidence attached.</h1>
+        <p class="lede">Signal Loom makes infographics from supplied research, reports, notes, and data. It turns that material into a clear web artifact while preserving the path from source to claim to narrative to representation to review.</p>
         <div class="actions">
           <a class="button primary" href="#install">Install Signal Loom</a>
           <a class="button secondary" href="https://github.com/Stunspot/signal-loom">View the repository</a>
@@ -44,15 +44,15 @@
         <p class="quiet">Package 0.1.0 · Codex and Claude Code · MIT License · Publication always manual</p>
       </div>
       <figure class="hero-visual">
-        <img src="assets/signal-loom-pages-hero.png" width="1200" height="800" alt="A Loomfile studio board connects source records and a claim ledger to a story spine, visual plan, and human review record across seven named stages.">
+        <img src="assets/signal-loom-pages-hero.png" width="1200" height="800" alt="An editor assembles a finished infographic from reports, data cards, charts, and citation slips connected by colored threads.">
       </figure>
     </section>
 
     <section class="section split" id="product">
       <div class="section-heading">
         <p class="eyebrow">The product</p>
-        <h2>A governed studio, not a generic graphic generator.</h2>
-        <p>Signal Loom is for researchers, analysts, educators, communicators, designers, and product teams who need a visual explanation that can survive inspection after the pretty bits arrive.</p>
+        <h2>An infographic studio that can show its work.</h2>
+        <p>Signal Loom is for researchers, analysts, educators, communicators, designers, and product teams who need an infographic that can survive inspection after the pretty bits arrive.</p>
       </div>
       <div class="card-grid two">
         <article><h3>What it can do</h3><ul><li>Inventory supplied evidence and source authority.</li><li>Track claim status and currentness.</li><li>Build a five-to-nine-beat story spine.</li><li>Choose an earned form for every beat.</li><li>Create semantic, responsive, offline-first HTML.</li><li>Preserve resumable state and exact review limits.</li></ul></article>
@@ -94,9 +94,9 @@ python (Join-Path $target 'scripts\self_check.py')</code></pre>
         <p class="eyebrow">First successful run</p>
         <h2>Begin with evidence, audience, and the desired change.</h2>
       </div>
-      <blockquote>Use <code>$signal-loom</code> with the supplied report. The audience is city budget staff; the intended change is understanding which maintenance delays create compounding cost. Build a semantic web visual story only. Treat the report as dated to 2026-06-30, do not fetch outside evidence, do not publish, and leave disputed claims visibly unresolved.</blockquote>
+      <blockquote>Use <code>$signal-loom</code> with the supplied report. The audience is city budget staff; the intended change is understanding which maintenance delays create compounding cost. Build a semantic web infographic only. Treat the report as dated to 2026-06-30, do not fetch outside evidence, do not publish, and leave disputed claims visibly unresolved.</blockquote>
       <ol class="steps">
-        <li><strong>Initialize.</strong><code>python scripts/init_loomfile.py ./my-story --title "My visual story"</code></li>
+        <li><strong>Initialize.</strong><code>python scripts/init_loomfile.py ./my-story --title "My infographic"</code></li>
         <li><strong>Supply.</strong>Put originals under <code>sources/originals/</code>; record authority and hashes.</li>
         <li><strong>Orient.</strong>Fill the brief and claim ledger before public-facing copy.</li>
         <li><strong>Build.</strong>Create the story spine, visual plan, and <code>output/web/index.html</code>.</li>

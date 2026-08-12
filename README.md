@@ -1,11 +1,12 @@
 # Signal Loom
 
-![Signal Loom: evidence moves through claims, story, form, and review while remaining inspectable](assets/signal-loom-readme-hero.png)
+![Signal Loom turns source material into a finished infographic while keeping the evidence connected](assets/signal-loom-readme-hero.png)
 
-Signal Loom is a source-bound visual-story production skill for people who need to turn supplied research, reports, notes, or data into a coherent web infographic without losing track of provenance, uncertainty, or human authority.
-[EDIT: SIGH. What Nova means is "It makes infographics real good!".]
+Signal Loom makes infographics from supplied research, reports, notes, and data. It helps researchers, analysts, educators, communicators, designers, and product teams turn source material into a clear web artifact without losing track of provenance, uncertainty, or human authority.
 
-It does not generate plausible-looking facts and call the glitter evidence. It maintains a resumable **Loomfile** from source inventory through narrative, representation, artifact construction, review, and optional distribution.
+The default deliverable is a semantic, responsive web infographic; requested derivatives can include carousels and other platform-native forms.
+
+Signal Loom does not generate plausible-looking facts and call the glitter evidence. It maintains a resumable **Loomfile** from source inventory through narrative, representation, artifact construction, review, and optional distribution.
 
 [Live guide](https://stunspot.github.io/signal-loom/) · [Customer guide](docs/CUSTOMER-GUIDE.md) · [Validation record](VALIDATION.md) · [Security](SECURITY.md) · [Support](SUPPORT.md) · [MIT license](LICENSE.md)
 
@@ -83,7 +84,7 @@ A directory existing is only the first layer. Verify each layer separately:
 A useful acceptance prompt:
 
 ```text
-Use $signal-loom to initialize a Loomfile for a web visual story from the attached source. Inventory the source and claims, draft a five-beat spine, choose earned representations, and stop before publication. Report files created, exact checks run, unresolved evidence, and unproved layers.
+Use $signal-loom to initialize a Loomfile for a web infographic from the attached source. Inventory the source and claims, draft a five-beat spine, choose earned representations, and stop before publication. Report files created, exact checks run, unresolved evidence, and unproved layers.
 ```
 
 For Claude Code, use `/signal-loom` in place of `$signal-loom`.
@@ -93,7 +94,7 @@ Expected early output is a Loomfile containing `project.yaml`, `sources/manifest
 ## First successful workflow
 
 ```bash
-python scripts/init_loomfile.py ./my-story --title "My evidence-bound visual story"
+python scripts/init_loomfile.py ./my-story --title "My evidence-bound infographic"
 ```
 
 Then:

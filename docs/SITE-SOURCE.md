@@ -12,6 +12,10 @@ This directory is the complete static source for `https://stunspot.github.io/sig
 - The README uses the separate 1600×720 `assets/signal-loom-readme-hero.png`.
 - There is no JavaScript, remote font, analytics, telemetry, form, iframe, or required third-party runtime.
 
+## Visual provenance
+
+The README hero, Pages hero, and social card are separately generated raster artworks created for Signal Loom, then sized for their specific surfaces. They are not produced by repository code. The social card visibly contains the exact product title and the line "Makes source-bound infographics from research and data." Final visual approval is bound to the recorded asset hashes.
+
 ## Content boundary
 
 The site explains product purpose, audience, capabilities, limits, Codex and Claude Code installation, verification, first use, workflow, outputs, configuration, troubleshooting, recovery, update, removal, data cleanup, privacy, network behavior, security, accessibility limits, provenance, support, contribution, license, and evidence status. The repository customer guide remains the detailed operational reference.

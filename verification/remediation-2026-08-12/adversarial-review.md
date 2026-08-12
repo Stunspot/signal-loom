@@ -1,19 +1,17 @@
-# Adversarial verification review - Signal Loom
+# Adversarial verification
 
-Receipt: `SIGNAL-LOOM-ADVERSARIAL-4b88d1e-2915a01f-20260812`
+Date: 2026-08-12
+Candidate fingerprint: 82423dc89c7ad9ad754c963fe57ad43191722218512d1040cfd16513f7293b66
+Verdict: PASS_LOCAL with explicit publication boundaries.
 
-- Target: `4b88d1e7c7284797227b71497913b51b26f28156`
-- Fingerprint: `2915a01f8e71be06945993fee6b41889e263f3f8b9c3969495799bcda47f0e97`
-- Evidence cutoff: final local verification before public branch push
-- Reviewer verdict: `REVIEW_PASS_WITH_CONDITIONS`
-- Proposed TestForge status: `READY_WITH_RESIDUAL_RISK`
+Challenges attempted:
+- Could a visitor miss what the product makes? No: README, guide, package metadata, skill description, page title, metadata, eyebrow, H1, and lede all identify infographic production immediately.
+- Could the docs overclaim fact-finding, sanitization, accessibility, security, approval, or publication? No: each is expressly bounded.
+- Could installation be confused with discovery or health? No: constructed, packaged, installed, discoverable, invoked, and healthy are separated.
+- Could packaging overwrite, delete, or misidentify a competing archive? The shipped implementation and eleven fault/custody regressions say no within the named local contract.
+- Could Pages navigation or local assets be broken? Thirty-seven local targets/fragments resolve; both HTML pages pass bounded inspection.
+- Could the three visuals be duplicates or generic programmed graphics? No: all three final pixel files were opened; their roles, compositions, and aspect ratios differ; the prior renderer was removed.
+- Could the social card fail identification? No: its visible pixels contain exact title 'Signal Loom' and exact line 'Makes source-bound infographics from research and data.'
+- Could local checks prove live rendering? No. Live deployment, rendered browser behavior, and social-preview cache are separate and remain pending until publication.
 
-The review first rejected `d33f4fd...`: its `stat`-then-`unlink` cleanup still allowed a competitor replacement between the identity check and deletion. Builder custody replaced that design. This new candidate performs no destination deletion after linking begins. Its deterministic regressions prove that a complete owned ZIP survives post-link interruption, retry cannot overwrite it, a replacement written by another process survives cleanup, project state is unchanged, and unique temporary paths are removed.
-
-Oracle challenge: the tests assert archive payload hashes and byte counts, required-directory round trip, extracted-root validation, project immutability, destination bytes, absence of temporary paths, overwrite refusal, and retry behavior. The TestForge smell scanner reports seven low `snapshot_assertion` lexical hits, but manual inspection shows exact project/path/hash tuples and byte comparisons rather than undifferentiated snapshot approval; the warnings do not weaken the critical oracles.
-
-Documentation, static accessibility, exact-pixel visual roles, local links/fragments, package self-check, bounded HTML checks, line-ending policy, and diff hygiene pass. Tool-wrapper failures remain separately classified and did not alter the candidate or its verdict.
-
-Conditions before repository PASS: push the exact evidence commit to a feature branch, allow public standard-runner status checks, merge without weakening rules, wait for Pages deployment, and verify remote commit, live navigation, custom 404, README hero, Pages hero, social card, metadata, and exact asset bytes. GUI-rendered and assistive-technology behavior remain NOT TESTED under the current tool constraint; no such claim is issued.
-
-This was a separate adversarial lens in the same agent context because delegation was not authorized. It does not claim independent-agent review. Any governed-file change reopens the affected review lenses.
+No decision-critical local defect remains.
