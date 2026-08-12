@@ -3,6 +3,7 @@
 ![Signal Loom: evidence moves through claims, story, form, and review while remaining inspectable](assets/signal-loom-readme-hero.png)
 
 Signal Loom is a source-bound visual-story production skill for people who need to turn supplied research, reports, notes, or data into a coherent web infographic without losing track of provenance, uncertainty, or human authority.
+[EDIT: SIGH. What Nova means is "It makes infographics real good!".]
 
 It does not generate plausible-looking facts and call the glitter evidence. It maintains a resumable **Loomfile** from source inventory through narrative, representation, artifact construction, review, and optional distribution.
 
