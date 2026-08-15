@@ -61,7 +61,7 @@ def initialize(destination: Path, title: str) -> Path:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("destination", type=Path)
-    parser.add_argument("--title", default="Untitled visual story")
+    parser.add_argument("--title", default="Untitled infographic")
     args = parser.parse_args(argv)
     try:
         created = initialize(args.destination, args.title)
