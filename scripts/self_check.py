@@ -47,7 +47,7 @@ def run() -> list[str]:
     except json.JSONDecodeError as exc:
         errors.append(f"manifest.json invalid: {exc}")
     else:
-        if manifest.get("name") != "signal-loom" or manifest.get("version") != "0.1.0":
+        if manifest.get("name") != "signal-loom" or manifest.get("version") != "0.1.1":
             errors.append("manifest identity or version mismatch")
         if sorted(manifest.get("hosts", [])) != ["claude", "codex"]:
             errors.append("manifest must declare separate Codex and Claude hosts")

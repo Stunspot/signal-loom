@@ -1,6 +1,6 @@
 # Signal Loom customer guide
 
-Signal Loom makes infographics from supplied research, reports, notes, and data. This guide takes the package from installation through removal. It is operational documentation for the `0.1.0` package, not a claim that every host/environment combination has been independently installed and exercised.
+Signal Loom makes infographics from supplied research, reports, notes, and data. This guide takes the package from installation through removal. It is operational documentation for the `0.1.1` package, not a claim that every host/environment combination has been independently installed and exercised.
 
 ## Choose the product when
 
