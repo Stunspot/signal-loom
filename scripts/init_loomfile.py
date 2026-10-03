@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Initialize a Signal Loom Loomfile from the bundled template."""
+"""Initialize a Signal Loom Infographics Loomfile from the bundled template."""
 
 from __future__ import annotations
 

@@ -2,7 +2,7 @@
 
 ## Scope
 
-Signal Loom is a local skill package with standard-library Python helpers. It does not operate a hosted service, collect telemetry, or publish artifacts. The AI host and any destination platform are separate security and privacy boundaries.
+Signal Loom Infographics is a local skill package with standard-library Python helpers. It does not operate a hosted service, collect telemetry, or publish artifacts. The AI host and any destination platform are separate security and privacy boundaries.
 
 ## Report a vulnerability
 

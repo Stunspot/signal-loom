@@ -1,10 +1,10 @@
-# Signal Loom customer guide
+# Signal Loom Infographics customer guide
 
-Signal Loom makes infographics from supplied research, reports, notes, and data. This guide takes the package from installation through removal. It is operational documentation for the `0.1.1` package, not a claim that every host/environment combination has been independently installed and exercised.
+Signal Loom Infographics makes infographics from supplied research, reports, notes, and data. This guide takes the package from installation through removal. It is operational documentation for the `0.1.1` package, not a claim that every host/environment combination has been independently installed and exercised.
 
 ## Choose the product when
 
-Use Signal Loom when you have supplied evidence and need an infographic whose claims, narrative, representations, outputs, and review state remain inspectable. Typical users include researchers, analysts, educators, communicators, product teams, and designers working with source-bound material.
+Use Signal Loom Infographics when you have supplied evidence and need an infographic whose claims, narrative, representations, outputs, and review state remain inspectable. Typical users include researchers, analysts, educators, communicators, product teams, and designers working with source-bound material.
 
 Do not use it as an autonomous fact finder, generic image generator, HTML sanitizer, publishing bot, compliance certification system, or substitute for domain review.
 
@@ -98,7 +98,7 @@ Example:
 Use $signal-loom with the supplied report and CSV. The audience is city budget staff; the intended change is understanding which maintenance delays create compounding cost. Build a semantic web infographic only. Treat the report as dated to 2026-06-30, do not fetch outside evidence, do not publish, and leave disputed claims visibly unresolved.
 ```
 
-Signal Loom should return or create an inspectable project—not merely a polished image. Expected outputs include a source manifest, brief, claim ledger, story spine, visual plan, web artifact, diagnostic record, and explicit unproved layers.
+Signal Loom Infographics should return or create an inspectable project—not merely a polished image. Expected outputs include a source manifest, brief, claim ledger, story spine, visual plan, web artifact, diagnostic record, and explicit unproved layers.
 
 ## Representative workflows
 
@@ -114,7 +114,7 @@ Signal Loom should return or create an inspectable project—not merely a polish
 
 ### Existing infographic diagnostic
 
-Supply the artifact source or an authorized image description. Signal Loom determines which evidence layer is present, identifies purpose and audience, and returns three highest-leverage corrections plus secondary findings. Source-only inspection must not be described as rendered visual review.
+Supply the artifact source or an authorized image description. Signal Loom Infographics determines which evidence layer is present, identifies purpose and audience, and returns three highest-leverage corrections plus secondary findings. Source-only inspection must not be described as rendered visual review.
 
 ### Web story to carousel
 
@@ -223,15 +223,15 @@ Compare the extracted project name, source manifest, source hashes, and embedded
 
 ## Privacy, storage, and network behavior
 
-Signal Loom creates no service account and contains no telemetry. The included Python scripts have no network code and operate on explicit local paths. The Loomfile holds whatever sources, claims, outputs, and review records you place inside it.
+Signal Loom Infographics creates no service account and contains no telemetry. The included Python scripts have no network code and operate on explicit local paths. The Loomfile holds whatever sources, claims, outputs, and review records you place inside it.
 
-The AI host is a separate boundary and may send prompts or files to its configured provider. Apply the host's data controls and your organization's policy. Do not supply sensitive material merely because Signal Loom's helper scripts are local.
+The AI host is a separate boundary and may send prompts or files to its configured provider. Apply the host's data controls and your organization's policy. Do not supply sensitive material merely because Signal Loom Infographics's helper scripts are local.
 
 URLs are treated as supplied data unless a separate fetch or research action is authorized. Imported HTML is parsed without script execution by the included inspector. Do not open untrusted output in a privileged browser profile or host it publicly before security review.
 
 ## Security boundaries
 
-Signal Loom does not claim to sanitize HTML, detect all secrets, verify dependencies, prove content safety, or establish professional fitness. Its default artifact pattern avoids required external runtimes. If a remote dependency is explicitly authorized, record the exact URL, version, purpose, license implications, integrity metadata where applicable, and failure behavior.
+Signal Loom Infographics does not claim to sanitize HTML, detect all secrets, verify dependencies, prove content safety, or establish professional fitness. Its default artifact pattern avoids required external runtimes. If a remote dependency is explicitly authorized, record the exact URL, version, purpose, license implications, integrity metadata where applicable, and failure behavior.
 
 See [SECURITY.md](../SECURITY.md) for reporting and safe handling.
 

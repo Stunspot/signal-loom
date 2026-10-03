@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Signal Loom story spine",
+  "title": "Signal Loom Infographics story spine",
   "type": "object",
   "required": ["status", "central_tension", "analytical_arc", "emotional_arc", "beats"],
   "properties": {

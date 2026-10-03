@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Signal Loom diagnostic record",
+  "title": "Signal Loom Infographics diagnostic record",
   "type": "object",
   "required": ["artifact", "top_three", "secondary", "unproved_layers"],
   "properties": {

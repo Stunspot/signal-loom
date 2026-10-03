@@ -8,14 +8,14 @@ This directory is the complete static source for `https://stunspot.github.io/sig
 - `404.html` is the repository-specific recovery page.
 - `style.css` contains the local responsive visual system.
 - `assets/signal-loom-pages-hero.png` is the 1200×800 Pages hero.
-- `assets/signal-loom-social-card.jpg` is the deployable 1200×630 Open Graph/social card (209 KB).
-- `assets/signal-loom-social-card.png` is the lossless source master and is not wired to social metadata because its 1.83 MB size exceeded the upload limit encountered during publication.
+- `assets/signal-loom-social-card.jpg` is the deployable 1731×909 Open Graph/social card (308,051 bytes).
+- `assets/signal-loom-social-card.png` is the lossless source master and is not wired to social metadata because it exceeds the social upload limit; the current master is 1731×909 and 2,635,725 bytes.
 - The README uses the separate 1600×720 `assets/signal-loom-readme-hero.png`.
 - There is no JavaScript, remote font, analytics, telemetry, form, iframe, or required third-party runtime.
 
 ## Visual provenance
 
-The README hero, Pages hero, and social card are separately generated raster artworks created for Signal Loom, then sized for their specific surfaces. They are not produced by repository code. The social card visibly contains the exact product title and the line "Makes source-bound infographics from research and data." Final visual approval is bound to the recorded asset hashes.
+The README hero, Pages hero, and social card are separately generated raster artworks created for Signal Loom Infographics, then sized for their specific surfaces. They are not produced by repository code. The social card visibly contains the exact product title and the line "Makes source-bound infographics from research and data." The 2026-10-03 display-name edit replaced the social-card lettering with the exact title **Signal Loom Infographics**, retained the descriptive line, and regenerated the JPG from the reviewed PNG master. The earlier visual-approval hashes describe historical bytes, not these current assets.
 
 ## Content boundary
 

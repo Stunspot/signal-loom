@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate core Signal Loom state without third-party dependencies."""
+"""Validate core Signal Loom Infographics state without third-party dependencies."""
 
 from __future__ import annotations
 

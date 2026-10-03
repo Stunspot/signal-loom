@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Signal Loom project",
+  "title": "Signal Loom Infographics project",
   "type": "object",
   "required": ["loomfile_version", "project_id", "title", "stage", "authority_status", "publication_status", "requested_outputs"],
   "properties": {

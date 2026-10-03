@@ -1,6 +1,6 @@
 # Support
 
-Signal Loom is community-supported through [GitHub Issues](https://github.com/Stunspot/signal-loom/issues).
+Signal Loom Infographics is community-supported through [GitHub Issues](https://github.com/Stunspot/signal-loom/issues).
 
 Before opening an issue:
 

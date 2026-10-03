@@ -1,10 +1,10 @@
-# Signal Loom
+# Signal Loom Infographics
 
 ![A working table where reports, charts, notes, and evidence threads are assembled into a finished infographic](assets/signal-loom-readme-hero.png)
 
-**Signal Loom makes infographics.** Give it research, reports, notes, data, an audience, and a purpose. It helps turn that material into a clear, evidence-traceable infographic instead of a decorative pile of claims wearing chart-shaped trousers.
+**Signal Loom Infographics makes infographics.** Give it research, reports, notes, data, an audience, and a purpose. It helps turn that material into a clear, evidence-traceable infographic instead of a decorative pile of claims wearing chart-shaped trousers.
 
-The default output is a semantic, responsive web infographic. Signal Loom can also reconstruct an approved story for carousels or other requested formats.
+The default output is a semantic, responsive web infographic. Signal Loom Infographics can also reconstruct an approved story for carousels or other requested formats.
 
 [See the live product guide](https://stunspot.github.io/signal-loom/) · [Install](#install) · [Make your first infographic](#make-your-first-infographic) · [Full customer guide](docs/CUSTOMER-GUIDE.md)
 
@@ -17,7 +17,7 @@ The default output is a semantic, responsive web infographic. Signal Loom can al
 
 ## What it makes
 
-Signal Loom produces a **Loomfile**: a resumable project folder containing the evidence, claims, story, visual plan, finished infographic, review records, and checkpoints that explain how the work was made.
+Signal Loom Infographics produces a **Loomfile**: a resumable project folder containing the evidence, claims, story, visual plan, finished infographic, review records, and checkpoints that explain how the work was made.
 
 A typical project contains:
 
@@ -39,7 +39,7 @@ That means inventory the evidence, decide what the infographic needs to say, cho
 
 ## What it does not do
 
-Signal Loom does not invent missing evidence, independently establish that a claim is true, refresh current facts without authorization, sanitize hostile HTML, approve its own work, or publish anything on its own.
+Signal Loom Infographics does not invent missing evidence, independently establish that a claim is true, refresh current facts without authorization, sanitize hostile HTML, approve its own work, or publish anything on its own.
 
 These remain separate states:
 
@@ -49,7 +49,7 @@ Static validation can catch defined structural defects. It cannot prove factual 
 
 ## Install
 
-Signal Loom supports Codex and Claude Code. Clone the complete repository into the host's personal skills directory.
+Signal Loom Infographics supports Codex and Claude Code. Clone the complete repository into the host's personal skills directory.
 
 ### Codex — PowerShell
 
@@ -77,9 +77,9 @@ Run `/skills`, confirm `signal-loom` is listed, then invoke `/signal-loom`. Rest
 
 Do not mistake a directory for a working product. Verify each layer:
 
-1. **Packaged:** `python scripts/self_check.py` returns `PASS: Signal Loom package self-check`.
+1. **Packaged:** `python scripts/self_check.py` returns `PASS: Signal Loom Infographics package self-check`.
 2. **Discoverable:** the host lists `signal-loom` after refresh or restart.
-3. **Invocable:** explicit invocation loads Signal Loom rather than a generic response.
+3. **Invocable:** explicit invocation loads Signal Loom Infographics rather than a generic response.
 4. **Healthy:** a small supplied source produces a coherent Loomfile that passes validation.
 
 Use this acceptance prompt in Codex:
@@ -127,7 +127,7 @@ The [customer guide](docs/CUSTOMER-GUIDE.md#begin-successfully) explains represe
 ## Common failures
 
 - **Installed but not listed:** confirm the path ends in `signal-loom/SKILL.md`, then refresh or restart the host.
-- **Generic copy instead of an infographic workflow:** invoke Signal Loom explicitly and include the audience, supplied evidence, intended change, output form, and publication boundary.
+- **Generic copy instead of an infographic workflow:** invoke Signal Loom Infographics explicitly and include the audience, supplied evidence, intended change, output form, and publication boundary.
 - **Python is unavailable:** try `py -3` on Windows or `python3` on Unix-like systems. Report deterministic checks as unexecuted if they cannot run.
 - **Source hash mismatch:** stop and determine why the bytes changed. Update the source record deliberately and re-review dependent claims.
 - **HTML inspection passes:** treat that as bounded static evidence, not proof of rendering, accessibility, security, or factual correctness.
@@ -147,7 +147,7 @@ Read [SECURITY.md](SECURITY.md) before using private, hostile, regulated, or pro
 
 Update a clone-based installation with `git pull --ff-only`, rerun `scripts/self_check.py`, and repeat discovery, invocation, and health checks.
 
-To remove Signal Loom, delete only its exact installation directory. Loomfiles, source copies, exported infographics, ZIP archives, host logs, synchronized folders, and backups are separate data and require separate retention decisions.
+To remove Signal Loom Infographics, delete only its exact installation directory. Loomfiles, source copies, exported infographics, ZIP archives, host logs, synchronized folders, and backups are separate data and require separate retention decisions.
 
 ## Evidence, support, and terms
 

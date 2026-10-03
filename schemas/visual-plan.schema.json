@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Signal Loom visual plan",
+  "title": "Signal Loom Infographics visual plan",
   "type": "object",
   "required": ["status", "mobile_first", "representations", "semantic_outline"],
   "properties": {

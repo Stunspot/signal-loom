@@ -1,6 +1,6 @@
 {
   "name": "signal-loom",
-  "product_name": "Signal Loom — The Source-Bound Infographic Augment",
+  "product_name": "Signal Loom Infographics",
   "version": "0.1.1",
   "description": "Makes source-bound web infographics and requested platform derivatives from supplied research, reports, notes, and data.",
   "entrypoint": "SKILL.md",

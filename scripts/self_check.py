@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check Signal Loom package structure and static contracts."""
+"""Check Signal Loom Infographics package structure and static contracts."""
 
 from __future__ import annotations
 
@@ -40,6 +40,8 @@ def run() -> list[str]:
     if not match or match.group(1).strip() != "signal-loom":
         errors.append("SKILL.md frontmatter name must be signal-loom")
     agent_text = (ROOT / "agents" / "openai.yaml").read_text(encoding="utf-8")
+    if '  display_name: "Signal Loom Infographics"' not in agent_text:
+        errors.append("agents/openai.yaml display_name must be Signal Loom Infographics")
     if "$signal-loom" not in agent_text:
         errors.append("agents/openai.yaml default_prompt must invoke $signal-loom")
     try:
@@ -49,6 +51,8 @@ def run() -> list[str]:
     else:
         if manifest.get("name") != "signal-loom" or manifest.get("version") != "0.1.1":
             errors.append("manifest identity or version mismatch")
+        if manifest.get("product_name") != "Signal Loom Infographics":
+            errors.append("manifest product_name must be Signal Loom Infographics")
         if sorted(manifest.get("hosts", [])) != ["claude", "codex"]:
             errors.append("manifest must declare separate Codex and Claude hosts")
     for schema_path in sorted((ROOT / "schemas").glob("*.json")):
@@ -69,7 +73,7 @@ def main() -> int:
     if errors:
         print(f"FAIL: {len(errors)} package error(s)")
         return 1
-    print("PASS: Signal Loom package self-check")
+    print("PASS: Signal Loom Infographics package self-check")
     return 0
 
 

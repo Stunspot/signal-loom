@@ -2,7 +2,7 @@
 
 ## The product invariant
 
-Signal Loom makes source-bound infographics. It is not a prompt menu or generic image generator; nine governed faculties and one durable state system carry supplied evidence into inspectable web infographics and requested platform derivatives.
+Signal Loom Infographics makes source-bound infographics. It is not a prompt menu or generic image generator; nine governed faculties and one durable state system carry supplied evidence into inspectable web infographics and requested platform derivatives.
 
 The user should feel a single loop:
 

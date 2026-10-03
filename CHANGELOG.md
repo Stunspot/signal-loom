@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-03 — Display-name edit (0.1.1)
+
+- Rename the current product display title to **Signal Loom Infographics** so its function is visible in catalogs, host metadata, documentation, and the product guide. Keep `signal-loom`, its invocation forms, compatibility contract, and version 0.1.1.
+
 All notable current-package changes are documented here. Historical release artifacts, if added later, remain immutable.
 
 ## Unreleased
