@@ -1,0 +1,9 @@
+{
+  "theme": "dark editorial evidence desk",
+  "background": "#111b22",
+  "foreground": "#f4f0e7",
+  "accent": "#99e1be",
+  "caution": "#f1c373",
+  "typography": "system-ui",
+  "motion": "none"
+}

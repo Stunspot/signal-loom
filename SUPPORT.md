@@ -10,6 +10,10 @@ Before opening an issue:
 4. state the host, operating system, Python version, command, exact output, and which evidence layer failed;
 5. check the [customer guide](docs/CUSTOMER-GUIDE.md#troubleshooting-and-recovery).
 
+For a legacy-format or stale-review message, preserve the original and use the [copy-first correction procedure](docs/STATE-AND-REVIEW.md#correct-or-migrate-a-project-safely). Include the declared Loomfile version and the exact validator error in a support report. Do not clear a review condition or incomplete-copy marker merely to obtain a pass.
+
+If a copy was interrupted, retain the original and partial destination; record whether `.migration-incomplete.json` exists. If archive commit was interrupted, leave any surviving output untouched until its custody and contents are known. A new destination lets you continue without overwriting evidence.
+
 Use one of these classifications:
 
 - package construction or installation;

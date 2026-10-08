@@ -15,8 +15,10 @@ from pathlib import Path
 
 try:
     from .validate_loomfile import validate
+    from .archive_paths import assert_chain, assert_unlinked, check_members
 except ImportError:  # Direct script execution.
     from validate_loomfile import validate
+    from archive_paths import assert_chain, assert_unlinked, check_members
 
 
 DENIED_NAMES = {".env", "id_rsa", "id_ed25519", "credentials", "credentials.json"}
@@ -59,8 +61,8 @@ def _write_file_entry(archive: zipfile.ZipFile, path: Path, arcname: str) -> dic
 
 
 def package(root: Path, output: Path) -> tuple[Path, int]:
-    root = root.expanduser().resolve()
-    output = output.expanduser().resolve()
+    root = assert_unlinked(root.expanduser())
+    output = assert_chain(output.expanduser(), allow_missing=True)
     if _within(root, output):
         raise ValueError(f"output must be outside the Loomfile: {output}")
     if output.exists() or output.is_symlink():
@@ -86,7 +88,13 @@ def package(root: Path, output: Path) -> tuple[Path, int]:
         if path != manifest_path:
             files.append(path)
 
+    names = [(f"{root.name}/{p.relative_to(root).as_posix()}/", b"") for p in directories]
+    names += [(f"{root.name}/{p.relative_to(root).as_posix()}", b"") for p in files]
+    names += [(f"{root.name}/review/release-manifest.json", b"")]
+    check_members(names, inspect_payload=False)
+    assert_chain(output.parent, allow_missing=True)
     output.parent.mkdir(parents=True, exist_ok=True)
+    assert_chain(output.parent)
     temporary_archive: Path | None = None
 
     try:

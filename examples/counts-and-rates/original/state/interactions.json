@@ -1,0 +1,10 @@
+{
+  "interactions": [
+    {
+      "id": "sources",
+      "kind": "native details",
+      "purpose": "Inspect original teaching sources without interrupting the main argument.",
+      "fallback": "All main claims and exact count table remain visible without JavaScript."
+    }
+  ]
+}

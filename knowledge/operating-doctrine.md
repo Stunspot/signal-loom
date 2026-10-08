@@ -28,6 +28,8 @@ A beautiful distortion is a failed artifact. A terse, truthful artifact with a c
 
 The Loomfile is the canonical project state, not an incidental export folder. It makes work resumable, reviewable, and transferable. Narrative, style, platform, and interaction decisions must be traceable to source and purpose rather than hidden in a final file.
 
+Current Loomfiles use format `0.2.0`. A review binds the whole material state, registered source bytes and all output resources. A changed chart, caption, stylesheet, source or claim requires a new assessment; adding a journal note or review record does not. Use the copy-first migration helper to start a new review cycle while keeping the original and prior review. Exact records and state transitions are described in `../docs/STATE-AND-REVIEW.md`.
+
 `stage`, `authority_status`, and `publication_status` are separate. A technically built artifact is not necessarily reviewed, approved, current, accessible, secure, or published.
 
 ## Evidence language

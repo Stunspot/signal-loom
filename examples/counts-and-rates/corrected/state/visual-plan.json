@@ -1,0 +1,60 @@
+{
+  "status": "draft",
+  "mobile_first": true,
+  "representations": [
+    {
+      "beat_id": "B1",
+      "form": "chart",
+      "rationale": "Common-baseline bars make comparable count magnitudes visible; adjacent table retains exact meaning.",
+      "claim_ids": [
+        "C-counts"
+      ]
+    },
+    {
+      "beat_id": "B2",
+      "form": "prose",
+      "rationale": "The inference boundary is a verbal judgment, not a made-up rate graphic.",
+      "claim_ids": [
+        "C-volume"
+      ]
+    },
+    {
+      "beat_id": "B3",
+      "form": "prose",
+      "rationale": "The inference boundary is a verbal judgment, not a made-up rate graphic.",
+      "claim_ids": [
+        "C-missing",
+        "C-rate"
+      ]
+    },
+    {
+      "beat_id": "B4",
+      "form": "prose",
+      "rationale": "The inference boundary is a verbal judgment, not a made-up rate graphic.",
+      "claim_ids": [
+        "C-volume",
+        "C-missing"
+      ]
+    },
+    {
+      "beat_id": "B5",
+      "form": "prose",
+      "rationale": "The inference boundary is a verbal judgment, not a made-up rate graphic.",
+      "claim_ids": [
+        "C-rate"
+      ]
+    }
+  ],
+  "semantic_outline": [
+    "h1 Question",
+    "h2 Recorded counts",
+    "h2 Engagement question",
+    "h2 Missing denominator",
+    "h2 Bounded conclusion",
+    "h2 Next evidence"
+  ],
+  "rejected": [
+    "Rate chart: missing denominators.",
+    "Region map: no geographical evidence and no spatial question."
+  ]
+}

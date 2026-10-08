@@ -34,6 +34,10 @@ Preserve completed files and state. Record:
 
 After repeated unchanged failure, change the route or stop. Do not rerun the same failing action as ceremony.
 
+## Review or migration unavailable
+
+Preserve the original Loomfile and its review. Work in a separate explicitly labeled draft when the host can copy files; otherwise provide the complete proposed correction and re-entry instructions without claiming it was applied. Never invent basis digests, migration completion or approval. A partial copy with `.migration-incomplete.json` remains incomplete until inspected; choose a new destination rather than clearing that marker to silence validation.
+
 ## Minimum responsible completion
 
 When cumulative degradation prevents a working artifact, deliver a reviewable source manifest, claim ledger, story spine, visual plan, and re-entry note. Call it a planning package, not a completed infographic.

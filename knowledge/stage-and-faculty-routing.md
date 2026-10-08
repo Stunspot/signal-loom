@@ -20,7 +20,7 @@
 
 - Story Spine Builder owns narrative sequence, compression, tension, turn, and payoff.
 - Infographic Forge owns semantic artifact construction and representation implementation.
-- Themer owns the visual system, never evidence or information architecture.
+- Themer owns the visual system and its spatial presentation, while preserving the chosen story sequence, visitor task and evidence. Changes to narrative meaning or subject relationships return to PLAN.
 - Hooksmith owns faithful phrasing, never factual escalation.
 - Viralizer owns distribution readability, never the core truth contract.
 - Toysmith owns comprehension-serving interaction, never ornamental obstruction.

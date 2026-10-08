@@ -1,0 +1,18 @@
+{
+  "loomfile_version": "0.2.0",
+  "project_id": "counts-and-rates-original",
+  "title": "More responses. Higher participation?",
+  "created_at": "2026-10-08T20:38:05.775699+00:00",
+  "updated_at": "2026-10-08T20:38:05.775699+00:00",
+  "stage": "reviewed",
+  "authority_status": "reviewed",
+  "publication_status": "manual_only",
+  "audience": "Analysts learning how counts differ from rates",
+  "intended_change": "Use count comparisons while recognizing missing denominators.",
+  "requested_outputs": [
+    "web"
+  ],
+  "constraints": [],
+  "unresolved": [],
+  "approval": {}
+}

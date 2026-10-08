@@ -21,6 +21,12 @@ No response-time or embargo guarantee is promised. Coordinated disclosure is req
 - Source paths in a manifest must resolve inside the Loomfile, but users must still review included material and access permissions.
 - Do not open untrusted generated HTML in a privileged browser profile or publish it before appropriate review.
 
+## Review records and copies
+
+Version 0.2.0 binds a declared assessment to normalized material records and actual source/output bytes. This detects stale declared reviews; it does not authenticate the reviewer, inspect referenced evidence, establish factual truth or prove human permission. An attacker able to rewrite the entire Loomfile can also rewrite its records. Keep authoritative originals and approval evidence under your own custody.
+
+The migration helper refuses linked/reparse source and destination paths, preserves originals and writes to an unused copy. The packager checks portable member names and never extracts ZIPs found inside supplied source data. Its own temporary archive is extracted only after its constructed namespace has been preflighted. These controls do not establish safety against a hostile process concurrently changing local filesystem paths; work in a directory you control.
+
 ## Sensitive data
 
 Create Loomfiles only in storage appropriate to the source material. The included scripts remain local, but the configured AI host may transmit prompts and files to its provider. Apply host data controls and organizational policy before supplying confidential, regulated, or personal information.

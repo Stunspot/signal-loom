@@ -11,4 +11,6 @@ Use this route in a chat system without scripts or file tools.
 7. Produce a diagnostic record: top three corrections, secondary findings, unresolved claims, currentness limits, human approvals, and unproved evidence layers.
 8. Give exact filenames and later commands for initializing, inspecting, validating, and packaging in a normal Signal Loom Infographics installation.
 
+For a later correction, retain the original file contents and old assessment, label the revised work draft, and show which evidence and visible values change together. Without tools, leave current review-basis capture and byte comparisons unexecuted; do not invent digests or claim format 0.2.0 reviewed/approved consistency. The later command is `python scripts/migrate_loomfile.py ORIGINAL NEW_COPY`; then follow `docs/STATE-AND-REVIEW.md`.
+
 Never split a file across multiple alternatives. Never claim that copied text was executed, rendered, parsed, tested, or packaged.

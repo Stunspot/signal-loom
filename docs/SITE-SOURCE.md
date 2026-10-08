@@ -23,6 +23,10 @@ The site explains product purpose, audience, capabilities, limits, Codex and Cla
 
 The live repository and live site must be checked after deployment. A source file, successful local check, workflow transcript, or HTTP 200 does not by itself establish rendered quality, navigation behavior, correct live assets, accessibility conformance, or publication success.
 
+## Correction and example navigation
+
+The 0.2.0 page adds a literal Corrections navigation target with the copy command and links to the completed example and review reference. The actual teaching Loomfiles live in the complete product under `examples/`; this Pages source links to their repository lesson instead of pretending the repository source viewer renders local HTML. Download/extract the package to open those infographics with their attached source links.
+
 ## Accessibility boundary
 
 The source includes semantic regions, one `h1`, ordered headings, alt text, a skip link, visible keyboard focus, reflow layouts, horizontally scrollable stage content, and reduced-motion treatment. These are source-level properties. Formal accessibility conformance requires separate rendered keyboard, zoom/reflow, contrast, screen-reader, and assistive-technology testing.

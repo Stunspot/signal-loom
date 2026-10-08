@@ -26,7 +26,7 @@
     <nav aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Signal Loom Infographics home"><span class="brand-mark" aria-hidden="true">SL</span><span>Signal Loom Infographics</span></a>
       <div class="nav-links">
-        <a href="#product">Product</a><a href="#install">Install</a><a href="#first-run">First run</a><a href="#workflow">Workflow</a><a href="#trust">Trust</a><a href="#manage">Manage</a><a href="#help">Help</a>
+        <a href="#product">Product</a><a href="#install">Install</a><a href="#first-run">First run</a><a href="#correction">Corrections</a><a href="#workflow">Workflow</a><a href="#trust">Trust</a><a href="#manage">Manage</a><a href="#help">Help</a>
       </div>
     </nav>
   </header>
@@ -41,7 +41,7 @@
           <a class="button primary" href="#install">Install Signal Loom Infographics</a>
           <a class="button secondary" href="https://github.com/Stunspot/signal-loom">View the repository</a>
         </div>
-        <p class="quiet">Package 0.1.1 · Codex and Claude Code · MIT License · Publication always manual</p>
+        <p class="quiet">Package 0.2.0 · Codex and Claude Code · MIT License · Publication always manual</p>
       </div>
       <figure class="hero-visual">
         <img src="assets/signal-loom-pages-hero.png" width="1200" height="800" alt="An editor assembles a finished infographic from reports, data cards, charts, and citation slips connected by colored threads.">
@@ -105,7 +105,14 @@ python (Join-Path $target 'scripts\self_check.py')</code></pre>
       <div class="commands"><pre><code>python scripts/validate_loomfile.py ./my-story
 python scripts/inspect_infographic_html.py ./my-story/output/web/index.html
 python scripts/package_loomfile.py ./my-story ./my-story.zip</code></pre></div>
-      <p>The output must be outside the Loomfile. The packager preserves required empty directories, hashes exact file-entry bytes into an embedded release manifest, extracts the completed candidate, and validates that archived Loomfile before exposing it; the project remains unchanged. Invalid archived state or write failure cleans the unique temporary artifact. A final-link interruption is commit-ambiguous: the packager never deletes the destination automatically because another process may own or replace it. Inspect any surviving ZIP; keep it if its embedded manifest validates, otherwise choose a new path or delete only after confirming custody. A competing output is never overwritten. The destination requires same-directory temporary-file and hard-link support. The filename denylist is not a content scanner, and nothing is published.</p>
+      <p>A packaged draft remains a draft. The output must be outside the Loomfile. The packager preserves required empty directories, hashes exact file-entry bytes into an embedded release manifest, extracts the completed candidate, and validates that archived Loomfile before exposing it; the project remains unchanged. Invalid archived state or write failure cleans the unique temporary artifact. A final-link interruption is commit-ambiguous: the packager never deletes the destination automatically because another process may own or replace it. Inspect any surviving ZIP; keep it if its embedded manifest validates, otherwise choose a new path or delete only after confirming custody. A competing output is never overwritten. The destination requires same-directory temporary-file and hard-link support. The filename denylist is not a content scanner, and nothing is published.</p>
+    </section>
+
+    <section class="section" id="correction">
+      <div class="section-heading"><p class="eyebrow">A result you can return to</p><h2>Correct the infographic. Keep the original.</h2><p>The completed fictional example compares response counts without inventing population denominators, then removes twelve duplicated responses in a separate copy.</p></div>
+      <p><a href="https://github.com/Stunspot/signal-loom/blob/main/examples/counts-and-rates/README.md">Follow the complete example and correction</a> · <a href="https://github.com/Stunspot/signal-loom/blob/main/docs/STATE-AND-REVIEW.md">Review fields and recovery</a></p>
+      <pre><code>python scripts/migrate_loomfile.py my-story my-story-corrected</code></pre>
+      <p>The original stays intact. The new copy starts as a draft, with the prior review in history. A changed source, claim or output needs a new assessment of the actual material. Capturing a basis records those files; it grants no review verdict or human approval. Drafts may still be packaged for backup.</p>
     </section>
 
     <section class="section paper" id="workflow">
@@ -153,7 +160,7 @@ python scripts/package_loomfile.py ./my-story ./my-story.zip</code></pre></div>
     <section class="section" id="manage">
       <div class="section-heading"><p class="eyebrow">Update, removal, and cleanup</p><h2>Change the skill without losing custody of the work.</h2></div>
       <div class="card-grid three">
-        <article><h3>Update</h3><p>Run <code>git pull --ff-only</code> in the installed skill directory, then repeat package, discovery, invocation, and health checks. Snapshot reviewed Loomfiles before state-contract changes.</p></article>
+        <article><h3>Update</h3><p>Run <code>git pull --ff-only</code> in the installed skill directory, then repeat package, discovery, invocation, and health checks. Use the copy-first migration helper for legacy or reviewed Loomfiles; inspect reported state gaps and assess corrected work again.</p></article>
         <article><h3>Remove</h3><p>Resolve and delete only the exact <code>signal-loom</code> install directory. Removing the skill does not remove projects created elsewhere.</p></article>
         <article><h3>Clean up data</h3><p>Inventory Loomfiles, source copies, exported HTML, ZIPs, host logs, synchronized copies, and backups separately. Ordinary deletion may not securely erase them.</p></article>
       </div>
@@ -178,7 +185,7 @@ python scripts/package_loomfile.py ./my-story ./my-story.zip</code></pre></div>
   </main>
 
   <footer>
-    <p><strong>Signal Loom Infographics</strong> · Collaborative Dynamics · Package 0.1.1</p>
+    <p><strong>Signal Loom Infographics</strong> · Collaborative Dynamics · Package 0.2.0</p>
     <p><a href="https://github.com/Stunspot/signal-loom">Repository</a> · <a href="https://github.com/Stunspot/signal-loom/blob/main/docs/CUSTOMER-GUIDE.md">Customer guide</a> · <a href="https://github.com/Stunspot/signal-loom/blob/main/SUPPORT.md">Support</a> · <a href="https://github.com/Stunspot/signal-loom/blob/main/CONTRIBUTING.md">Contribute</a> · <a href="https://github.com/Stunspot/signal-loom/blob/main/LICENSE.md">MIT License</a></p>
   </footer>
 </body>

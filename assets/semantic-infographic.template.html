@@ -8,17 +8,20 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Untitled infographic</title>
   <style>
-    :root { --ink:#171d1a; --paper:#f7f3ea; --accent:#276b57; --line:#d8d0c2; }
+    :root { --ink:#ede9d7; --paper:#0c1719; --accent:#e1b478; --line:#385551; --surface:#182c2b; }
     * { box-sizing:border-box; }
     body { margin:0; color:var(--ink); background:var(--paper); font:1rem/1.6 system-ui,sans-serif; }
     .wrap { width:min(68rem,calc(100% - 2rem)); margin-inline:auto; }
     header,main section,footer { padding:clamp(2.5rem,7vw,6rem) 0; }
-    header { color:white; background:var(--ink); }
+    header { color:var(--ink); background:radial-gradient(ellipse at 85% 0%,#345653 0%,transparent 55%),linear-gradient(125deg,#152b2e,#0c1719); border-bottom:1px solid var(--accent); }
     h1,h2 { max-width:18ch; font-family:Georgia,serif; line-height:1.08; text-wrap:balance; }
     h1 { margin:0; font-size:clamp(2.8rem,8vw,6rem); }
     h2 { font-size:clamp(2rem,5vw,3.6rem); }
     main section { border-bottom:1px solid var(--line); }
-    .disclosure { padding:.75rem 1rem; background:#fff1bd; }
+    .disclosure { padding:1rem 1.25rem; color:var(--ink); background:var(--surface); border-left:4px solid var(--accent); }
+    main section:nth-child(2) { background:linear-gradient(110deg,#192a25,transparent); }
+    h2 { color:var(--accent); }
+    footer { color:#b7c8c1; font-size:.925rem; }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
   </style>
 </head>

@@ -1,0 +1,46 @@
+{
+  "artifact": "output/web/index.html",
+  "status": "PASS_WITH_CONDITIONS",
+  "reviewer": "Nova, in-process teaching-example author",
+  "intended_use": "local fictional count-versus-rate teaching",
+  "basis": {
+    "format": "signal-loom-review-basis/v1",
+    "material_sha256": "82de20c4bc9f02f80b65e346fa4d4229eef81747b217de23711717fcedef7fb4",
+    "source_files": {
+      "S-original": {
+        "path": "sources/originals/responses.csv",
+        "sha256": "9f385be1ca18bd1eb9f8d6926ed11899769098956516f79f8743ea18a1503b7d"
+      },
+      "S-note": {
+        "path": "sources/originals/source-note.md",
+        "sha256": "0545cef51bdf817922fffbdc06f8c687eaf393d66a38453dc06d94d49997f89d"
+      }
+    },
+    "output_files": {
+      "output/web/index.html": "4bffdb7398a3148e4872acb81f7e68aa495ea23226e750d0cb54327180f2cbc7"
+    },
+    "sha256": "cb327364e1754d4a90dc00d5b3a1e3e5876c4c9cf1c2fb490de1abc0a19252df"
+  },
+  "evidence": [
+    "review/review-notes.md",
+    "review/static-check.txt"
+  ],
+  "conditions": [
+    {
+      "id": "render",
+      "statement": "Inspect the actual rendered artifact before claiming rendered quality.",
+      "status": "open",
+      "blocking": false
+    }
+  ],
+  "top_three": [],
+  "secondary": [],
+  "unproved_layers": [
+    "browser rendering",
+    "representative user",
+    "formal accessibility",
+    "security",
+    "human approval",
+    "publication"
+  ]
+}

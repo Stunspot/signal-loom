@@ -1,5 +1,5 @@
 {
-  "loomfile_version": "0.1.0",
+  "loomfile_version": "0.2.0",
   "project_id": "REPLACE_ME",
   "title": "Untitled infographic",
   "created_at": null,
@@ -9,7 +9,10 @@
   "publication_status": "manual_only",
   "audience": "",
   "intended_change": "",
-  "requested_outputs": ["web"],
+  "requested_outputs": [
+    "web"
+  ],
   "constraints": [],
-  "unresolved": []
+  "unresolved": [],
+  "approval": {}
 }

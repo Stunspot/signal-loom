@@ -1,0 +1,33 @@
+{
+  "manifest_version": "0.1.0",
+  "sources": [
+    {
+      "id": "S-original",
+      "path": "sources/originals/responses.csv",
+      "kind": "dataset",
+      "authority": "illustrative",
+      "sha256": "9f385be1ca18bd1eb9f8d6926ed11899769098956516f79f8743ea18a1503b7d"
+    },
+    {
+      "id": "S-note",
+      "path": "sources/originals/source-note.md",
+      "kind": "notes",
+      "authority": "illustrative",
+      "sha256": "0545cef51bdf817922fffbdc06f8c687eaf393d66a38453dc06d94d49997f89d"
+    },
+    {
+      "id": "S-corrected",
+      "path": "sources/originals/responses-corrected.csv",
+      "kind": "dataset",
+      "authority": "illustrative",
+      "sha256": "620ac7ccc1a2b5791f7a7dc2f9e8b0aa7fe0e1545914b419100f4fe1a5bf8f85"
+    },
+    {
+      "id": "S-correction",
+      "path": "sources/originals/correction.md",
+      "kind": "notes",
+      "authority": "illustrative",
+      "sha256": "b64e7adc443605fdd8d86c748852deac15d7e9e596dbbfcb4f0587cc93d36f51"
+    }
+  ]
+}

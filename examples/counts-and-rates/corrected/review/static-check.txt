@@ -1,0 +1,4 @@
+WARN: missing og:title metadata
+WARN: missing twitter:card metadata
+PASS: bounded static HTML checks (2 warning(s))
+LIMIT: no claim of sanitization, rendered accessibility, browser behavior, security, or visual quality

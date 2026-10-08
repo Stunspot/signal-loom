@@ -31,6 +31,12 @@ For documentation or visual changes, also:
 
 Static checks do not replace rendered browser, keyboard, zoom/reflow, screen-reader, security, or fresh-host testing. State what was not tested.
 
+## Maintain the release and record contract
+
+Record-format changes must preserve an explicit legacy-to-current route and separate current assessment from historical approval. Add a successful control as well as the changed failure case. Keep the complete count-and-correction example usable, including its fictional label and denominator limit; changing a reviewed example's material requires a fresh assessment, not just a rewritten digest.
+
+The maintained complete-bundle procedure is [Release maintenance](docs/RELEASE-MAINTENANCE.md). Its source allowlist excludes repository history, raw private evidence and earlier releases. Finish customer docs, sidecars and applicable consumer mappings before readiness review. Build a real release only after the completed candidate and independent review are accepted. Preserve the canonical faculty source and historical archives.
+
 ## Pull requests
 
 Keep the change coherent and avoid unrelated formatting churn. Explain the user problem, material changes, exact commands and results, unproved evidence layers, and any migration or rollback considerations. By contributing, you agree that your contribution is licensed under the repository's [MIT License](LICENSE.md).

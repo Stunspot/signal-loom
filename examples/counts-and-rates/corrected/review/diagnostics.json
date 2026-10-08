@@ -1,0 +1,54 @@
+{
+  "artifact": "output/web/index.html",
+  "status": "PASS_WITH_CONDITIONS",
+  "reviewer": "Nova, in-process teaching-example author",
+  "intended_use": "local fictional count-versus-rate teaching",
+  "basis": {
+    "format": "signal-loom-review-basis/v1",
+    "material_sha256": "f8929b9578b2ea1e5dd1a68bbcd740e67806288eee53317b5d9b6e5a36812e10",
+    "source_files": {
+      "S-original": {
+        "path": "sources/originals/responses.csv",
+        "sha256": "9f385be1ca18bd1eb9f8d6926ed11899769098956516f79f8743ea18a1503b7d"
+      },
+      "S-note": {
+        "path": "sources/originals/source-note.md",
+        "sha256": "0545cef51bdf817922fffbdc06f8c687eaf393d66a38453dc06d94d49997f89d"
+      },
+      "S-corrected": {
+        "path": "sources/originals/responses-corrected.csv",
+        "sha256": "620ac7ccc1a2b5791f7a7dc2f9e8b0aa7fe0e1545914b419100f4fe1a5bf8f85"
+      },
+      "S-correction": {
+        "path": "sources/originals/correction.md",
+        "sha256": "b64e7adc443605fdd8d86c748852deac15d7e9e596dbbfcb4f0587cc93d36f51"
+      }
+    },
+    "output_files": {
+      "output/web/index.html": "1dbddcca37495288d4f8c2fb395a9015313a46bb7bbc7e47ca560fe7469d2d6e"
+    },
+    "sha256": "d37acc834d98204ba50c703e5d84c0fc5c210c2de397b5a8fbe5b0ec42ca3b31"
+  },
+  "evidence": [
+    "review/review-notes.md",
+    "review/static-check.txt"
+  ],
+  "conditions": [
+    {
+      "id": "render",
+      "statement": "Inspect the actual rendered artifact before claiming rendered quality.",
+      "status": "open",
+      "blocking": false
+    }
+  ],
+  "top_three": [],
+  "secondary": [],
+  "unproved_layers": [
+    "browser rendering",
+    "representative user",
+    "formal accessibility",
+    "security",
+    "human approval",
+    "publication"
+  ]
+}

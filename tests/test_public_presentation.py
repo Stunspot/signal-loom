@@ -13,7 +13,7 @@ class PublicPresentationTests(unittest.TestCase):
         manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(title, manifest["product_name"])
         self.assertEqual("signal-loom", manifest["name"])
-        self.assertEqual("0.1.1", manifest["version"])
+        self.assertEqual("0.2.0", manifest["version"])
         skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
         self.assertIn("\nname: signal-loom\n", skill)
         self.assertIn(f"\n# {title}\n", skill)

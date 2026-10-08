@@ -5,5 +5,20 @@
   "secondary": [],
   "claim_integrity": "unreviewed",
   "static_checks": "unexecuted",
-  "unproved_layers": ["behavioral", "fresh-host", "rendered-visual", "accessibility", "security", "professional", "commercial", "publication"]
+  "unproved_layers": [
+    "behavioral",
+    "fresh-host",
+    "rendered-visual",
+    "accessibility",
+    "security",
+    "professional",
+    "commercial",
+    "publication"
+  ],
+  "status": "not_run",
+  "reviewer": "",
+  "intended_use": "",
+  "basis": null,
+  "evidence": [],
+  "conditions": []
 }

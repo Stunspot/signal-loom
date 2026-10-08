@@ -1,0 +1,55 @@
+{
+  "status": "draft",
+  "central_tension": "Largest count tempts a claim about greatest participation.",
+  "analytical_arc": "count observation -> tempting inference -> missing denominator -> bounded conclusion -> next evidence",
+  "emotional_arc": "curiosity -> confidence -> pause -> clarity -> useful next action",
+  "beats": [
+    {
+      "id": "B1",
+      "role": "setup",
+      "text": "Counts and common survey window",
+      "claim_ids": [
+        "C-counts"
+      ],
+      "energy": "calm"
+    },
+    {
+      "id": "B2",
+      "role": "tension",
+      "text": "Does larger volume mean greater engagement?",
+      "claim_ids": [
+        "C-volume"
+      ],
+      "energy": "rising"
+    },
+    {
+      "id": "B3",
+      "role": "turn",
+      "text": "The denominators are absent",
+      "claim_ids": [
+        "C-missing",
+        "C-rate"
+      ],
+      "energy": "pivot"
+    },
+    {
+      "id": "B4",
+      "role": "insight",
+      "text": "Count ranking is useful within its limit",
+      "claim_ids": [
+        "C-volume",
+        "C-missing"
+      ],
+      "energy": "falling"
+    },
+    {
+      "id": "B5",
+      "role": "watchpoint",
+      "text": "Gather compatible denominators before calculating rates",
+      "claim_ids": [
+        "C-rate"
+      ],
+      "energy": "calm"
+    }
+  ]
+}

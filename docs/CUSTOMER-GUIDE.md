@@ -1,6 +1,8 @@
 # Signal Loom Infographics customer guide
 
-Signal Loom Infographics makes infographics from supplied research, reports, notes, and data. This guide takes the package from installation through removal. It is operational documentation for the `0.1.1` package, not a claim that every host/environment combination has been independently installed and exercised.
+Signal Loom Infographics makes infographics from supplied research, reports, notes, and data. This guide takes the package from installation through removal. It is operational documentation for the `0.2.0` package, not a claim that every host/environment combination has been independently installed and exercised.
+
+Start with [the completed count-and-correction example](../examples/counts-and-rates/README.md) to see the result and follow its evidence. For a current assessment or correction, use [State, review, and correction](STATE-AND-REVIEW.md).
 
 ## Choose the product when
 
@@ -122,28 +124,28 @@ Distribution runs only when requested. The carousel is reconstructed as a six-to
 
 ### Resume reviewed work
 
-Open the existing Loomfile. Before changing consequential reviewed state, create a snapshot under `checkpoints/snapshots/` or a versioned copy. Record decisions and authority changes; re-run every review invalidated by the change.
+Use `python scripts/migrate_loomfile.py ORIGINAL NEW_COPY` for an old-format or reviewed project. It preserves the original, copies user content and moves the copied old review/project to history, then resets only the new copy to intake/draft. Inspect reported validation gaps before advancing. Correct sources, claims, representations and visible output together, then capture and assess the new material. [Exact correction and recovery procedure](STATE-AND-REVIEW.md#correct-or-migrate-a-project-safely).
 
 ## Configuration and state
 
 `project.yaml` is JSON-compatible data despite its filename. Its key state fields are:
 
-- `loomfile_version`: currently `0.1.0`;
+- `loomfile_version`: currently `0.2.0`;
 - `stage`: `intake`, `spined`, `planned`, `built`, `reviewed`, or `approved_for_export`;
 - `authority_status`: `draft`, `reviewed`, or `approved`;
 - `publication_status`: always `manual_only` in this product;
 - `requested_outputs`: one or more of `web`, `carousel`, or `platform`.
 
-These are independent. `approved_for_export` requires human `approved` authority. Neither means published.
+These labels have related requirements but different meanings. `reviewed` requires a current recorded assessment and does not imply it passed. `approved_for_export` requires a passing current review and explicit matching human approval with resolved or expressly accepted blocking conditions. Neither means published. [Field definitions and worked procedure](STATE-AND-REVIEW.md).
 
 Claim records in `state/claims.jsonl` use:
 
 - status: `sourced`, `inferred`, `illustrative`, `missing`, `stale`, or `disputed`;
 - currentness: `timeless`, `dated`, or `current-sensitive`;
 - a valid source id and locator for sourced claims;
-- an `as_of` value for current-sensitive sourced claims.
+- an `as_of` value for dated or current-sensitive sourced claims.
 
-At `approved_for_export`, unresolved `missing`, `stale`, or `disputed` claims block validation. Schema files document intended structure; the current validator implements a focused subset rather than full JSON Schema evaluation.
+At approved authority or `approved_for_export`, used `missing`, `stale`, or `disputed` claims block validation. Unused unresolved ledger entries can remain as visible research history. Schema files document intended structure; the current validator implements a focused subset rather than full JSON Schema evaluation.
 
 ## Deterministic tools
 
@@ -161,7 +163,7 @@ The destination must be missing or an empty, non-symlink directory. The initiali
 python scripts/validate_loomfile.py LOOMFILE
 ```
 
-Checks required paths, state enums, publication boundary, source containment and hashes, claim statuses and linkage, and stage-dependent artifacts. `--skip-hashes` intentionally weakens the check and should be recorded when used.
+Checks required paths, state enums, publication boundary, source containment and hashes, claim statuses and linkage, and stage-dependent artifacts. Also checks supported JSON records, unique ids, source/story/representation edges and the whole-project review basis. `--skip-hashes` is a diagnostic option; it cannot qualify current review or approval.
 
 ### Inspect HTML
 
@@ -177,7 +179,7 @@ Checks a bounded set of static HTML properties: semantic regions, language, titl
 python scripts/package_loomfile.py LOOMFILE OUTPUT.zip
 ```
 
-The output must resolve outside the Loomfile. The packager validates the source state, refuses symbolic links and several secret-like names, preserves required empty directories, and builds a one-root archive at a temporary path. It hashes the exact bytes written to each file entry and places the generated release manifest inside the ZIP; it does not alter the Loomfile's existing `review/release-manifest.json`. It then extracts and validates the archived Loomfile, so a registered source changed after pre-validation is rejected rather than exposed. Only a revalidated ZIP is linked at the requested path. Invalid archived state or write failure removes the unique temporary artifact and preserves the project. A final-link interruption is commit-ambiguous: the packager never deletes the destination automatically, because another process may own or replace that path. Inspect any surviving ZIP; if its embedded manifest validates, keep it. Otherwise choose a new path, or delete the exact invalid output only after confirming custody. An existing or concurrently created output is never overwritten. Its denylist is not a content scanner.
+Drafts can be backed up as well as approved work; a packaged draft remains a draft. The output must be outside the Loomfile. The packager preflights portable member names and rejects linked/reparse source or target paths. Supplied nested ZIPs are opaque source files, not instructions to extract them. The packager validates the source state, refuses symbolic links and several secret-like names, preserves required empty directories, and builds a one-root archive at a temporary path. It hashes the exact bytes written to each file entry and places the generated release manifest inside the ZIP; it does not alter the Loomfile's existing `review/release-manifest.json`. It then extracts and validates the archived Loomfile, so a registered source changed after pre-validation is rejected rather than exposed. Only a revalidated ZIP is linked at the requested path. Invalid archived state or write failure removes the unique temporary artifact and preserves the project. A final-link interruption is commit-ambiguous: the packager never deletes the destination automatically, because another process may own or replace that path. Inspect any surviving ZIP; if its embedded manifest validates, keep it. Otherwise choose a new path, or delete the exact invalid output only after confirming custody. An existing or concurrently created output is never overwritten. Its denylist is not a content scanner.
 
 ## Troubleshooting and recovery
 
@@ -240,7 +242,7 @@ See [SECURITY.md](../SECURITY.md) for reporting and safe handling.
 - Quality depends on source quality, host capability, model behavior, and human review.
 - Static validators cover named rules, not rendered behavior or truth.
 - Schemas are shipped as reference contracts; `validate_loomfile.py` does not execute full JSON Schema validation.
-- The initializer does not migrate or merge projects.
+- The initializer does not merge projects. The separate migration helper supports formats 0.1.0 and 0.2.0 through a new copy, not an in-place upgrade.
 - The packager's secret-like filename denylist is incomplete and does not inspect file contents.
 - Safe final-path creation requires the archive destination filesystem to support same-directory temporary files and hard links; choose another local destination if that operation is unavailable.
 - No publication, hosting, social posting, media buying, or account login is performed.

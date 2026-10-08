@@ -1,0 +1,52 @@
+{
+  "format": "cd-customer-documentation/v1",
+  "product": "Signal Loom Infographics",
+  "slug": "signal-loom",
+  "version": "0.2.0",
+  "scope": "Hesperos materially reworks the complete first-use, reviewed correction, migration, evidence and delivery journeys and authors the worked lesson/reference. Machine-facing SKILL and doctrine use Promptcraft separately.",
+  "customer_docs": [
+    "README.md",
+    "docs/CUSTOMER-GUIDE.md",
+    "docs/STATE-AND-REVIEW.md",
+    "docs/RELEASE-MAINTENANCE.md",
+    "examples/counts-and-rates/README.md",
+    "examples/counts-and-rates/original/output/web/index.html",
+    "examples/counts-and-rates/corrected/output/web/index.html",
+    "docs/index.html",
+    "docs/SITE-SOURCE.md",
+    "VALIDATION.md",
+    "SECURITY.md",
+    "SUPPORT.md",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md",
+    "fallbacks/universal-copy-paste-workflow.md",
+    "fallbacks/degraded-capability.md",
+    "delivery-sidecars/Signal Loom Infographics T-Free v0.2.0.md",
+    "delivery-sidecars/Signal Loom Infographics T-Free v0.2.0 Extra.md"
+  ],
+  "customer_document_inventory": [
+    "README.md",
+    "docs/CUSTOMER-GUIDE.md",
+    "docs/STATE-AND-REVIEW.md",
+    "docs/RELEASE-MAINTENANCE.md",
+    "examples/counts-and-rates/README.md",
+    "examples/counts-and-rates/original/output/web/index.html",
+    "examples/counts-and-rates/corrected/output/web/index.html",
+    "docs/index.html",
+    "docs/SITE-SOURCE.md",
+    "VALIDATION.md",
+    "SECURITY.md",
+    "SUPPORT.md",
+    "CONTRIBUTING.md",
+    "CHANGELOG.md",
+    "fallbacks/universal-copy-paste-workflow.md",
+    "fallbacks/degraded-capability.md",
+    "delivery-sidecars/Signal Loom Infographics T-Free v0.2.0.md",
+    "delivery-sidecars/Signal Loom Infographics T-Free v0.2.0 Extra.md",
+    "docs/404.html"
+  ],
+  "retained_legacy_docs": [
+    "docs/404.html"
+  ],
+  "retained_boundary": "Unchanged 404 recovery source retains historical source authorship; no new authorship is claimed. License remains its unchanged legal notice, outside instructional documentation."
+}

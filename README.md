@@ -6,7 +6,7 @@
 
 The default output is a semantic, responsive web infographic. Signal Loom Infographics can also reconstruct an approved story for carousels or other requested formats.
 
-[See the live product guide](https://stunspot.github.io/signal-loom/) · [Install](#install) · [Make your first infographic](#make-your-first-infographic) · [Full customer guide](docs/CUSTOMER-GUIDE.md)
+[See the live product guide](https://stunspot.github.io/signal-loom/) · [Install](#install) · [Make your first infographic](#make-your-first-infographic) · [Full customer guide](docs/CUSTOMER-GUIDE.md) · [Completed example and correction](examples/counts-and-rates/README.md)
 
 ## What you give it
 
@@ -95,7 +95,7 @@ Use `/signal-loom` instead of `$signal-loom` in Claude Code.
 
 ## Make your first infographic
 
-Initialize a project:
+For a guided first use, open [the completed fictional count comparison](examples/counts-and-rates/README.md), then make its correction in a new copy. To begin with your own material, initialize a project:
 
 ```bash
 python scripts/init_loomfile.py ./my-story --title "My evidence-bound infographic"
@@ -116,13 +116,19 @@ python scripts/validate_loomfile.py ./my-story
 python scripts/inspect_infographic_html.py ./my-story/output/web/index.html
 ```
 
-After human review and approval, package it without overwriting an existing archive:
+Package a draft for backup, or approved work for its approved use, without overwriting an existing archive. Packaging itself grants no approval:
 
 ```bash
 python scripts/package_loomfile.py ./my-story ./my-story.zip
 ```
 
 The [customer guide](docs/CUSTOMER-GUIDE.md#begin-successfully) explains representative workflows, configuration, packaging recovery, and the full state contract.
+
+## Return with a correction
+
+Use `python scripts/migrate_loomfile.py ORIGINAL NEW_COPY` to preserve reviewed or legacy work before editing. It leaves the original intact and starts a new draft with the prior review in history. Reconcile the evidence and infographic, then assess the actual changed files. [Follow the correction procedure](docs/STATE-AND-REVIEW.md#correct-or-migrate-a-project-safely).
+
+Version 0.2.0 introduces material/output review binding and copy-first migration from Loomfile format 0.1.0. A successful capture records the files being assessed; it does not create a verdict or human approval. [Review fields and state requirements](docs/STATE-AND-REVIEW.md).
 
 ## Common failures
 

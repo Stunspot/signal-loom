@@ -22,6 +22,13 @@ REQUIRED = (
     "scripts/validate_loomfile.py",
     "scripts/inspect_infographic_html.py",
     "scripts/package_loomfile.py",
+    "scripts/capture_review_basis.py",
+    "scripts/migrate_loomfile.py",
+    "scripts/loomfile_state.py",
+    "scripts/archive_paths.py",
+    "scripts/build_release.py",
+    "scripts/verify_release.py",
+    "examples/counts-and-rates/README.md",
     "fallbacks/degraded-capability.md",
     "fallbacks/universal-copy-paste-workflow.md",
 )
@@ -49,7 +56,7 @@ def run() -> list[str]:
     except json.JSONDecodeError as exc:
         errors.append(f"manifest.json invalid: {exc}")
     else:
-        if manifest.get("name") != "signal-loom" or manifest.get("version") != "0.1.1":
+        if manifest.get("name") != "signal-loom" or manifest.get("version") != "0.2.0":
             errors.append("manifest identity or version mismatch")
         if manifest.get("product_name") != "Signal Loom Infographics":
             errors.append("manifest product_name must be Signal Loom Infographics")

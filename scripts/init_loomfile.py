@@ -10,6 +10,10 @@ import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+try:
+    from .archive_paths import assert_chain, assert_unlinked
+except ImportError:
+    from archive_paths import assert_chain, assert_unlinked
 
 
 SKILL_ROOT = Path(__file__).resolve().parent.parent
@@ -29,7 +33,7 @@ def slugify(value: str) -> str:
 
 
 def initialize(destination: Path, title: str) -> Path:
-    destination = destination.expanduser().resolve()
+    destination = assert_chain(destination.expanduser(), allow_missing=True)
     if destination.exists():
         if destination.is_symlink():
             raise ValueError("destination must not be a symbolic link")
@@ -37,9 +41,20 @@ def initialize(destination: Path, title: str) -> Path:
             raise ValueError("destination exists and is not a directory")
         if any(destination.iterdir()):
             raise ValueError("destination exists and is not empty")
-        destination.rmdir()
+        # Preserve the supplied empty directory and its metadata.
     destination.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(TEMPLATE_ROOT, destination, symlinks=False)
+    assert_unlinked(TEMPLATE_ROOT)
+    destination.mkdir(exist_ok=True)
+    assert_chain(destination)
+    for item in sorted(TEMPLATE_ROOT.rglob('*')):
+        target = destination / item.relative_to(TEMPLATE_ROOT)
+        if item.is_dir():
+            target.mkdir(parents=True, exist_ok=True)
+        elif item.is_file():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            assert_chain(target.parent)
+            with item.open('rb') as incoming, target.open('xb') as outgoing:
+                shutil.copyfileobj(incoming, outgoing)
     for relative in REQUIRED_DIRECTORIES:
         (destination / relative).mkdir(parents=True, exist_ok=True)
 
@@ -54,7 +69,7 @@ def initialize(destination: Path, title: str) -> Path:
             "updated_at": now,
         }
     )
-    project_path.write_text(json.dumps(project, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    project_path.write_text(json.dumps(project, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     return destination
 
 

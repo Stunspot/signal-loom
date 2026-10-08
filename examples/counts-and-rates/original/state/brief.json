@@ -1,0 +1,19 @@
+{
+  "purpose": "Teach count versus rate through one complete inspectable infographic.",
+  "audience": "Analysts learning how counts differ from rates",
+  "intended_change": "Use count comparisons while recognizing missing denominators.",
+  "source_authority": "fictional_teaching_material",
+  "outputs": [
+    "web"
+  ],
+  "assumptions": [
+    "Counts describe one common fictional survey window."
+  ],
+  "constraints": [
+    "No invented denominators or participation rankings.",
+    "Local web artifact only; no publication."
+  ],
+  "open_questions": [
+    "Eligible population and final rate-compatible response definition are absent."
+  ]
+}

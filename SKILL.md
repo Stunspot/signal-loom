@@ -51,6 +51,8 @@ Hooks must be faithful to the evidence. Never inflate novelty, certainty, urgenc
 
 Use Infographic Forge plus Diagnostic Reviewer. Decide what each beat should become: prose, diagram, chart, interaction, or omission. A chart is earned by comparable quantitative data; a diagram is earned by structure, sequence, relationship, or causality. Do not fabricate numbers to justify a chart.
 
+Before selecting a visual form, name the reader’s highest-value question and what seeing or manipulating this artifact adds beyond a conversational answer: comparison, spatial overview, relationships, temporal context, scenarios or source drill-down. Let the subject supply the visual grammar. Browse and interaction should expose the meaningful content before search or configuration.
+
 Create `state/visual-plan.json`. Record rejected representations when the choice is consequential. Plan mobile-first semantic structure, textual alternatives, metadata, and clean component seams before styling.
 
 ### 4. BUILD
@@ -63,11 +65,11 @@ If code execution is unavailable, provide complete copy-ready file contents and 
 
 Invoke only the faculties the artifact actually needs:
 
-- Themer controls palette, typography, spacing, material, motion, and implementation tokens. It must not rewrite structure or evidence.
+- Themer controls palette, typography, spacing, material, motion, and implementation tokens. It preserves the story sequence, factual meaning and evidence, while allowing composition, spatial hierarchy, material and component treatment to change.
 - Hooksmith refines content-faithful titles, labels, fact cells, and microcopy.
 - Toysmith adds only interactions that improve comprehension. Target three to seven only when the material earns them; zero is acceptable. Support touch, keyboard, reduced motion, and graceful degradation.
 
-Store theme and interaction decisions in `state/theme.tokens.json` and `state/interactions.json`.
+Use a developed dark default when the user has not supplied another visual direction. Make requested themes different working environments through composition, typography, material, depth and interaction emphasis, rather than swapping colors on the same boxes. Consider imagery as one useful dimension; it is not a quota. Store theme and interaction decisions in `state/theme.tokens.json` and `state/interactions.json`.
 
 ### 6. DISTRIBUTE
 
@@ -81,21 +83,23 @@ Native reconstruction must preserve the same evidence and meaning while changing
 
 ### 7. VERIFY
 
-Always apply Diagnostic Reviewer and the available deterministic validators. Report the three highest-leverage corrections first, then secondary issues. Verify claim linkage, currentness, representation integrity, semantic structure, mobile intent, alt coverage, heading order, reduced motion, metadata, interaction fallback, and export completeness.
+Always apply Diagnostic Reviewer and the available deterministic validators. Report up to three genuine highest-leverage corrections first, then genuine secondary issues; do not invent faults to fill a faculty output quota. Verify claim linkage, currentness, representation integrity, semantic structure, mobile intent, alt coverage, heading order, reduced motion, metadata, interaction fallback, and export completeness.
 
 Use `scripts/validate_loomfile.py`, `scripts/inspect_infographic_html.py`, and `scripts/package_loomfile.py` when Python is available. Static inspection is a guardrail, not proof of sanitization, browser rendering, accessibility conformance, security, or professional fitness.
 
-Write review results under `review/`. Advance `stage` only when its required artifacts exist. Keep these independent:
+Capture the completed material with `scripts/capture_review_basis.py LOOMFILE LOOMFILE/review/basis-current.json`, then assess that actual work. The capture is a byte/state record, never a verdict. Write the real assessment in `review/diagnostics.json` with this basis, reviewer, intended use, evidence references, findings and conditions. Preserve earlier assessments before replacing the current one. Consult `docs/STATE-AND-REVIEW.md` for exact fields. Advance `stage` only when its linked story, representations and requested outputs exist. Keep these independent:
 
 - `stage`: `intake`, `spined`, `planned`, `built`, `reviewed`, `approved_for_export`;
 - `authority_status`: `draft`, `reviewed`, `approved`;
 - `publication_status`: always `manual_only` in this product.
 
+A reviewed assessment may be PASS, PASS_WITH_CONDITIONS, REVISE or BLOCKED; reviewed does not mean approved. Approval needs an actual accountable owner, intended use and authority evidence bound to the current basis. Keep open blocking findings visible; a residual needs explicit owner acceptance for the same use. Never manufacture favorable reviews or approval from a successful helper command. Drafts may be packaged for backup; packaging preserves their state.
+
 Do not publish, post, host, log into accounts, buy media, or claim user approval.
 
 ## State and resumption
 
-Use `scripts/init_loomfile.py DESTINATION` to initialize a new Loomfile. Resume from existing state instead of restarting. Before changing a reviewed project, snapshot material state under `checkpoints/snapshots/` or make a new versioned copy.
+Use `scripts/init_loomfile.py DESTINATION` to initialize a new Loomfile. Resume from existing state instead of restarting. For a reviewed project or a legacy format, use `scripts/migrate_loomfile.py ORIGINAL NEW_COPY` before consequential edits. Continue in the new copy, inspect the reported state gaps, and reconcile sources, claims, story and output together. The original stays intact; the prior review in the copy is historical. New inputs or any changed output resource invalidate the previous whole-project basis. Advance back to built only after inspecting the retained work; assess it again for the intended use.
 
 Every consequential judgment belongs in `state/decisions.jsonl`: timestamp if known, stage, decision, rationale, evidence or source ids, alternatives, and authority.
 
@@ -130,6 +134,8 @@ Load the specialized references only when their topic applies:
 - `knowledge/claim-and-currentness-doctrine.md`
 - `knowledge/representation-and-chart-integrity.md`
 - `knowledge/html-trust-boundary.md`
+
+For a situated source-to-output and correction example, follow `examples/counts-and-rates/README.md`; its invented data teach the workflow and must never become evidence for the current subject.
 
 Use `assets/semantic-infographic.template.html` for implementation shape when a concrete pattern is needed; keep all subject matter sourced from the current project.
 

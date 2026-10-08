@@ -221,6 +221,8 @@ class InitializeLoomfileTests(unittest.TestCase):
                     "id": "S1",
                     "path": "sources/originals/source.txt",
                     "sha256": hashlib.sha256(b"before").hexdigest(),
+                    "kind": "dataset",
+                    "authority": "supplied",
                 }
             ]
             source_manifest_path.write_text(

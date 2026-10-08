@@ -6,9 +6,16 @@
 
 All notable current-package changes are documented here. Historical release artifacts, if added later, remain immutable.
 
-## Unreleased
+## 0.2.0 — Current review and recoverable corrections
 
-- No unreleased changes.
+- Bind assessments to the whole material state, source bytes and actual output resources; require coherent source/claim/story/representation links.
+- Separate reviewed assessments, passing reviews, recorded approval and backup packaging.
+- Add exclusive review-basis capture and copy-first migration from legacy0.1.0 or current0.2.0 Loomfiles, preserving originals and historical review.
+- Teach the source-to-infographic and correction path with complete fictional count-versus-rate examples.
+- Maintain an intentional complete product release builder with portable namespaces and extracted payload verification; retain historical verification in repository custody, outside installable cargo.
+- Preserve the canonical faculty toolkit, existing display name, generated artwork and manual-only publication.
+
+Compatibility: Loomfile format0.2.0 replaces0.1.0 for current validation. Use a new migrated copy; no in-place conversion or automatic approval transfer. Product release remains subject to the recorded acceptance and delivery process.
 
 ## 0.1.1
 

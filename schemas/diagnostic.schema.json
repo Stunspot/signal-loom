@@ -2,12 +2,200 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Signal Loom Infographics diagnostic record",
   "type": "object",
-  "required": ["artifact", "top_three", "secondary", "unproved_layers"],
+  "required": [
+    "status",
+    "reviewer",
+    "intended_use",
+    "basis",
+    "evidence",
+    "conditions",
+    "top_three",
+    "secondary",
+    "unproved_layers"
+  ],
   "properties": {
-    "artifact": {"type": "string"},
-    "top_three": {"type": "array", "maxItems": 3},
-    "secondary": {"type": "array"},
-    "unproved_layers": {"type": "array"}
+    "status": {
+      "enum": [
+        "not_run",
+        "PASS",
+        "PASS_WITH_CONDITIONS",
+        "REVISE",
+        "BLOCKED"
+      ]
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "intended_use": {
+      "type": "string"
+    },
+    "basis": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "statement",
+          "status",
+          "blocking"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "open",
+              "met",
+              "accepted_residual"
+            ]
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "resolution_evidence": {
+            "type": "string"
+          },
+          "acceptance": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string"
+              },
+              "intended_use": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "top_three": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "statement",
+          "status",
+          "blocking"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "open",
+              "met",
+              "accepted_residual"
+            ]
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "resolution_evidence": {
+            "type": "string"
+          },
+          "acceptance": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string"
+              },
+              "intended_use": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "secondary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "statement",
+          "status",
+          "blocking"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "open",
+              "met",
+              "accepted_residual"
+            ]
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "resolution_evidence": {
+            "type": "string"
+          },
+          "acceptance": {
+            "type": "object",
+            "properties": {
+              "owner": {
+                "type": "string"
+              },
+              "intended_use": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "unproved_layers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "description": "Reference shape. Current assessed states need nonempty reviewer/use/evidence and an exact basis; the native validator also enforces review and approval relationships."
 }

@@ -10,5 +10,11 @@
   "integrity_and_code": [],
   "top_three": [],
   "secondary": [],
-  "unproved_layers": []
+  "unproved_layers": [],
+  "status": "not_run",
+  "reviewer": "",
+  "intended_use": "",
+  "basis": null,
+  "evidence": [],
+  "conditions": []
 }
