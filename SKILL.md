@@ -1,6 +1,6 @@
 ---
 name: signal-loom
-description: "📊 Build infographics from supplied research and data."
+description: "📊 Infographics from research, data, and visual narrative."
 ---
 
 # Signal Loom Infographics
